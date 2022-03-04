@@ -1,0 +1,32 @@
+{
+  "name": "pierrecourant_6_03032022",
+  "version": "1.0.0",
+  "description": "Rien à installer ici, il suffit d'ouvrir le fichier `index.html`.",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
+  },
+  // "gitHooks": {
+  //   "pre-push": "npm run lint"
+  // },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pcourant/PierreCourant_6_03032022.git"
+  },
+  "author": "pcourant",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pcourant/PierreCourant_6_03032022/issues"
+  },
+  "homepage": "https://github.com/pcourant/PierreCourant_6_03032022#readme",
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.32.0",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.2.0",
+    "yorkie": "^2.0.0"
+  }
+}
