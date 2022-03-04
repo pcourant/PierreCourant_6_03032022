@@ -7,9 +7,6 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ."
   },
-  // "gitHooks": {
-  //   "pre-push": "npm run lint"
-  // },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/pcourant/PierreCourant_6_03032022.git"
