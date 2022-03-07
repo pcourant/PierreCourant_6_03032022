@@ -1,29 +1,42 @@
+//An fetch error with the body of the response
+class FetchError extends Error {
+  constructor(response) {
+    super(`HTTP error ${response.status}`);
+    this.response = response;
+  }
+}
+
+// This is a wrapper that throws an error (with the response body) on failure
+// or return a promise that parses a JSON response.
+// It checks as well that the input is really JSON
+function fetchJSON(...args) {
+  return fetch(...args).then((response) => {
+    // Get the content type of the response
+    var contentType = response.headers.get("content-type");
+
+    if (!response.ok) {
+      throw new FetchError(response);
+    }
+
+    // Check whether the content type is correct before you process it further
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new TypeError("The fetchJSON response doesn't contain JSON !");
+    }
+
+    return response.json();
+  });
+}
+
 async function getPhotographers() {
-  // Penser à remplacer par les données récupérées dans le json
-  const photographers = [
-    {
-      name: "Ma data test",
-      id: 1,
-      city: "Paris",
-      country: "France",
-      tagline: "Ceci est ma data test",
-      price: 400,
-      portrait: "account.png",
-    },
-    {
-      name: "Autre data test",
-      id: 2,
-      city: "Londres",
-      country: "UK",
-      tagline: "Ceci est ma data test 2",
-      price: 500,
-      portrait: "account.png",
-    },
-  ];
-  // et bien retourner le tableau photographers seulement une fois
-  return {
-    photographers: [...photographers, ...photographers, ...photographers],
-  };
+  return fetchJSON("/data/photographers.json")
+    .then((data) => data.photographers)
+    .catch((error) => {
+      console.error(error);
+    });
+
+  // return fetch("/data/photographers.json")
+  //   .then((response) => response.json())
+  //   .then((data) => data.photographers);
 }
 
 async function displayData(photographers) {
@@ -38,7 +51,8 @@ async function displayData(photographers) {
 
 async function init() {
   // Récupère les datas des photographes
-  const { photographers } = await getPhotographers();
+  // const { photographers } = await getPhotographers();
+  const photographers = await getPhotographers();
   displayData(photographers);
 }
 
