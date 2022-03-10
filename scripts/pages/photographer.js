@@ -1,58 +1,41 @@
-//An fetch error with the body of the response
-class FetchError extends Error {
-  constructor(response) {
-    super(`HTTP error ${response.status}`);
-    this.response = response;
-  }
-}
-
-// This is a wrapper that throws an error (with the response body) on failure
-// or return a promise that parses a JSON response.
-// It checks as well that the input is really JSON
-function fetchJSON(...args) {
-  return fetch(...args).then((response) => {
-    // Get the content type of the response
-    var contentType = response.headers.get("content-type");
-
-    if (!response.ok) {
-      throw new FetchError(response);
-    }
-
-    // Check whether the content type is correct before you process it further
-    if (!contentType || !contentType.includes("application/json")) {
-      throw new TypeError("The fetchJSON response doesn't contain JSON !");
-    }
-
-    return response.json();
-  });
-}
-
-async function getPhotographers() {
-  return fetchJSON("/data/photographers.json")
-    .then((data) => data.photographers)
-    .catch((error) => {
-      console.error(error);
-    });
-
-  // return fetch("/data/photographers.json")
-  //   .then((response) => response.json())
-  //   .then((data) => data.photographers);
-}
-
-async function getPhotographer(id) {
-  const photographers = await getPhotographers();
-  const photographer = photographers.find((x) => `${x.id}` === id);
-  return photographer;
-}
-
-async function init() {
-  // Récupère l'ID du photographe
+// Récupère l'ID du photographe
+function getPhotographerIdFromURL() {
   const parsedUrl = new URL(window.location.href);
   const id = parsedUrl.searchParams.get("id");
   console.log("id", id);
+  return id;
+}
 
-  const photographer = await getPhotographer(id);
+function displayPhotographHeader(photographer) {
+  const photographHeader = document.querySelector(".photograph-header");
+
+  const photographerModel = photographerFactory(photographer);
+  photographerModel.constructPhotographHeaderDOM(photographHeader);
+}
+
+async function displayMedias(medias) {
+  const mediaContainer = document.querySelector(".media-container");
+
+  medias.forEach((media) => {
+    const mediaModel = mediaFactory(media);
+    console.log(mediaModel);
+    console.log(mediaModel.id);
+    const mediaCardDOM = mediaModel.getMediaCardDOM();
+    mediaContainer.appendChild(mediaCardDOM);
+  });
+}
+
+async function init() {
+  const photographerId = getPhotographerIdFromURL();
+  const photographer = await getPhotographer(photographerId);
   console.log("photographer", photographer);
+
+  displayPhotographHeader(photographer);
+
+  // Récupère les medias du photographe
+  const medias = await getMediasOfPhotographer(photographerId);
+  console.log(medias);
+  displayMedias(medias);
 }
 
 init();

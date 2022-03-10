@@ -8,6 +8,14 @@
       href="https://fonts.googleapis.com/css?family=DM+Sans&display=swap"
       rel="stylesheet"
     />
+    <!-- intégration de FontAwesome avec CDN -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.css"
+      integrity="sha512-4wfcoXlib1Aq0mUtsLLM74SZtmB73VHTafZAvxIp/Wk9u1PpIsrfmTvK0+yKetghCL8SHlZbMyEcV8Z21v42UQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <title>Fisheye - photographe</title>
   </head>
   <body>
@@ -15,13 +23,19 @@
       <img src="assets/images/logo.png" class="logo" />
     </header>
     <main id="main">
-      <div class="photograph-header">
-        <button class="contact_button" onclick="displayModal()">
+      <section class="photograph-header">
+        <!-- <button class="contact-button" onclick="displayModal()">
           Contactez-moi
-        </button>
-      </div>
+        </button> -->
+      </section>
+      <section class="media-section">
+        <div class="media-sorting-container">
+          <p>Trier par</p>
+        </div>
+        <div class="media-container"></div>
+      </section>
     </main>
-    <div id="contact_modal">
+    <div id="contact-modal">
       <div class="modal">
         <header>
           <h2>Contactez-moi</h2>
@@ -32,11 +46,14 @@
             <label>Prénom</label>
             <input />
           </div>
-          <button class="contact_button">Envoyer</button>
+          <button class="contact-button">Envoyer</button>
         </form>
       </div>
     </div>
-    <script src="/scripts/utils/contactForm.js"></script>
+    <script src="scripts/utils/fetchData.js"></script>
+    <script src="scripts/utils/contactForm.js"></script>
+    <script src="scripts/factories/PhotographerFactory.js"></script>
+    <script src="scripts/factories/MediaFactory.js"></script>
     <script src="scripts/pages/photographer.js"></script>
   </body>
 </html>

@@ -1,0 +1,88 @@
+function photographerFactory(data) {
+  const { name, id, city, country, tagline, price, portrait } = data;
+
+  const picture = `assets/photographers/${portrait}`;
+
+  function getUserCardDOM() {
+    // Création de l'élément DOM : article
+    const article = document.createElement("article");
+
+    // Création du lien : img + h2
+    const link = document.createElement("a");
+    link.id = `${id}`;
+    link.setAttribute("href", `/photographer.html?id=${id}`);
+
+    const img = document.createElement("img");
+    img.setAttribute("src", picture);
+    // Texte alternatif vide selon la maquette Figma
+    img.setAttribute("alt", "");
+    const h2 = document.createElement("h2");
+    h2.textContent = name;
+    link.appendChild(img);
+    link.appendChild(h2);
+    // ------------------------------------------------
+
+    // Création des paragraphes de l'article
+    const locationParagraph = document.createElement("p");
+    locationParagraph.classList.add("location");
+    locationParagraph.textContent = `${city}, ${country}`;
+    const taglineParagraph = document.createElement("p");
+    taglineParagraph.classList.add("tagline");
+    taglineParagraph.textContent = tagline;
+    const priceParagraph = document.createElement("p");
+    priceParagraph.classList.add("price");
+    priceParagraph.textContent = `${price}€/jour`;
+    // ------------------------------------------------
+
+    // Création de la structure DOM de l'article
+    article.appendChild(link);
+    article.appendChild(locationParagraph);
+    article.appendChild(taglineParagraph);
+    article.appendChild(priceParagraph);
+
+    return article;
+  }
+
+  function constructPhotographHeaderDOM(photographHeader) {
+    // Création de l'élément DOM de description : div
+    const description = document.createElement("div");
+    description.classList.add("phtographer-profile");
+
+    // Création des éléments descriptifs
+    const h2 = document.createElement("h2");
+    h2.textContent = name;
+    const locationParagraph = document.createElement("p");
+    locationParagraph.classList.add("location");
+    locationParagraph.textContent = `${city}, ${country}`;
+    const taglineParagraph = document.createElement("p");
+    taglineParagraph.classList.add("tagline");
+    taglineParagraph.textContent = tagline;
+
+    description.appendChild(h2);
+    description.appendChild(locationParagraph);
+    description.appendChild(taglineParagraph);
+
+    // <button class="contact-button" onclick="displayModal()">
+    //   Contactez-moi
+    // </button>;
+    // Création du bouton
+    const contactMeButton = document.createElement("button");
+    contactMeButton.classList.add("contact-button");
+    contactMeButton.textContent = "Contactez-moi";
+
+    // Création de l'image
+    const img = document.createElement("img");
+    img.setAttribute("src", picture);
+    // Texte alternatif vide selon la maquette Figma
+    img.setAttribute("alt", "");
+
+    // Création du DOM
+    photographHeader.appendChild(description);
+    photographHeader.appendChild(contactMeButton);
+    photographHeader.appendChild(img);
+
+    // return article;
+  }
+
+  return { id, name, picture, getUserCardDOM, constructPhotographHeaderDOM };
+}
