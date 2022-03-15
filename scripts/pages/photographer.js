@@ -1,10 +1,13 @@
 // Ouverture du menu dropdown
+// @data: les medias du photographe à trier
 function dropDown(data) {
   let arrowOpen = document.getElementById("arrow-down-open");
   let arrowClose = document.getElementById("arrow-up-close");
+
+  // le DOM element du dropdown menu
   let hiddenSorting = document.getElementById("hidden-sorting");
 
-  // add event listener on chevron down and up to open or close the
+  // Ajout des event listeners sur les chevrons haut et bas du dropdown menu "trier par"
   arrowOpen.addEventListener("click", () => {
     hiddenSorting.classList.add("display");
   });
@@ -12,10 +15,11 @@ function dropDown(data) {
     hiddenSorting.classList.remove("display");
   });
 
+  // Ajout des event listeners sur les éléments du dropdown menu
   sortMedias(data);
 }
 
-// Trier les médias
+// Ajout des event listeners sur les éléments du dropdown menu
 function sortMedias(data) {
   // let medias_sorted_array = [];
   // const MEDIAS = data.dataMedias;
@@ -74,10 +78,9 @@ function getPhotographerIdFromURL() {
   return id;
 }
 
-function displayPhotographHeader(photographer) {
+function displayPhotographHeader(photographerModel) {
   const photographHeader = document.querySelector(".photograph-header");
 
-  const photographerModel = photographerFactory(photographer);
   photographerModel.constructPhotographHeaderDOM(photographHeader);
 }
 
@@ -93,12 +96,21 @@ async function displayMedias(medias) {
   });
 }
 
+async function displayLikesAndPrice(photographerModel) {
+  const priceContainer = document.getElementById("price-container");
+
+  priceContainer.textContent = photographerModel.price;
+}
+
 async function init() {
   const photographerId = getPhotographerIdFromURL();
   const photographer = await getPhotographer(photographerId);
   // console.log("photographer", photographer);
+  const photographerModel = photographerFactory(photographer);
 
-  displayPhotographHeader(photographer);
+  displayPhotographHeader(photographerModel);
+
+  displayLikesAndPrice(photographerModel);
 
   dropDown(null);
 

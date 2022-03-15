@@ -84,5 +84,12 @@ function photographerFactory(data) {
     // return article;
   }
 
-  return { id, name, picture, getUserCardDOM, constructPhotographHeaderDOM };
+  return {
+    id,
+    name,
+    picture,
+    price,
+    getUserCardDOM,
+    constructPhotographHeaderDOM,
+  };
 }

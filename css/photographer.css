@@ -234,6 +234,33 @@ ul#hidden-sorting li:last-child:hover {
   margin-left: 7px;
 }
 
+/* ---------------------------------------------------------------- */
+
+#likes-price-container {
+  position: fixed;
+  bottom: 0;
+  right: 36px;
+
+  width: 376px;
+  height: 89px;
+
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  background-color: #db8876;
+
+  font-size: 24px;
+  font-weight: 500;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 0 31px;
+}
+
+/* ---------------------------------------------------------------- */
+
 .modal {
   border-radius: 5px;
   background-color: #db8876;
