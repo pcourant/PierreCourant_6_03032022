@@ -30,7 +30,23 @@
       </section>
       <section class="media-section">
         <div class="media-sorting-container">
-          <p>Trier par</p>
+          <label for="sorting-select">Trier par</label>
+          <div id="sorting-wrapper">
+            <button id="sorting-btn" aria-haspopup="listbox">
+              <span>Popularité</span
+              ><i class="fas fa-chevron-down" id="arrow-down-open"></i>
+            </button>
+            <ul id="hidden-sorting" role="listbox">
+              <li class="sorting" role="option">
+                <span>Popularité</span>
+                <i class="fas fa-chevron-up" id="arrow-up-close"></i>
+              </li>
+              <hr />
+              <li class="sorting" role="option"><span>Date</span></li>
+              <hr />
+              <li class="sorting" role="option"><span>Titre</span></li>
+            </ul>
+          </div>
         </div>
         <div class="media-container"></div>
       </section>
