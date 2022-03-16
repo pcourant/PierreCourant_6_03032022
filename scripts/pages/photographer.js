@@ -1,6 +1,6 @@
 // Ouverture du menu dropdown
 // @data: les medias du photographe à trier
-function dropDown(data) {
+function displayDropDown(data) {
   let arrowOpen = document.getElementById("arrow-down-open");
   let arrowClose = document.getElementById("arrow-up-close");
 
@@ -102,6 +102,51 @@ async function displayLikesAndPrice(photographerModel) {
   priceContainer.textContent = photographerModel.price;
 }
 
+async function displayModalHeaderH2(photographerModel) {
+  const modalHeaderH2 = document.querySelector(".contact-modal h2");
+
+  modalHeaderH2.innerHTML = `Contactez-moi<br />` + `${photographerModel.name}`;
+}
+
+async function displayModal() {
+  document.querySelector("body > header").classList.add("transparent");
+  document.getElementById("main").classList.add("transparent");
+  document.querySelector(".contact-modal").classList.add("displayModal");
+}
+
+async function closeModal() {
+  document.querySelector(".contact-modal").classList.remove("displayModal");
+  document.querySelector("body > header").classList.remove("transparent");
+  document.getElementById("main").classList.remove("transparent");
+
+  const contactForm = document.getElementById("contact-form");
+  contactForm.reset();
+}
+
+async function submitFormOnClick(photographerModel) {
+  document.querySelector("form").addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const contactForm = document.getElementById("contact-form");
+    const formData = new FormData(contactForm);
+
+    console.log(
+      "----- FORM SUBMITTED to " + `${photographerModel.name}` + "-----"
+    );
+
+    // Check all for inputs
+    for (let pair of formData) {
+      let value = pair[1];
+      let key = pair[0];
+      console.log(key + ": " + value);
+    }
+
+    console.log("--------------------------------------------");
+
+    closeModal();
+  });
+}
+
 async function init() {
   const photographerId = getPhotographerIdFromURL();
   const photographer = await getPhotographer(photographerId);
@@ -109,10 +154,11 @@ async function init() {
   const photographerModel = photographerFactory(photographer);
 
   displayPhotographHeader(photographerModel);
-
   displayLikesAndPrice(photographerModel);
+  displayModalHeaderH2(photographerModel);
+  submitFormOnClick(photographerModel);
 
-  dropDown(null);
+  displayDropDown(null);
 
   // Récupère les medias du photographe
   const medias = await getMediasOfPhotographer(photographerId);

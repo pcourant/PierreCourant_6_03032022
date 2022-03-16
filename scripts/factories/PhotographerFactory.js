@@ -62,14 +62,6 @@ function photographerFactory(data) {
     description.appendChild(locationParagraph);
     description.appendChild(taglineParagraph);
 
-    // <button class="contact-button" onclick="displayModal()">
-    //   Contactez-moi
-    // </button>;
-    // Création du bouton
-    const contactMeButton = document.createElement("button");
-    contactMeButton.classList.add("contact-button");
-    contactMeButton.textContent = "Contactez-moi";
-
     // Création de l'image
     const img = document.createElement("img");
     img.setAttribute("src", picture);
@@ -77,8 +69,7 @@ function photographerFactory(data) {
     img.setAttribute("alt", "");
 
     // Création du DOM
-    photographHeader.appendChild(description);
-    photographHeader.appendChild(contactMeButton);
+    photographHeader.insertBefore(description, photographHeader.firstChild);
     photographHeader.appendChild(img);
 
     // return article;

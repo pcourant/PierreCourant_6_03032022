@@ -34,9 +34,6 @@ function mediaFactory(data) {
       );
 
       vid.insertBefore(src, vid.firstChild);
-      // vid.appendChild(src);
-      // vid.textContent = "Sorry, your browser doesn't support embedded videos.";
-
       link.appendChild(vid);
     }
     // ------------------------------------------------

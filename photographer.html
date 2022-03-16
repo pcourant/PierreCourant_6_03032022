@@ -24,9 +24,9 @@
     </header>
     <main id="main">
       <section class="photograph-header">
-        <!-- <button class="contact-button" onclick="displayModal()">
+        <button class="contact-button" onclick="displayModal()">
           Contactez-moi
-        </button> -->
+        </button>
       </section>
       <section class="media-section">
         <div class="media-sorting-container">
@@ -57,21 +57,30 @@
         </div>
       </section>
     </main>
-    <div id="contact-modal">
+    <section class="contact-modal">
       <div class="modal">
         <header>
-          <h2>Contactez-moi</h2>
+          <h2>
+            Contactez-moi<br />
+            ...
+          </h2>
           <img src="assets/icons/close.svg" onclick="closeModal()" />
         </header>
-        <form>
+        <form id="contact-form">
           <div>
-            <label>Prénom</label>
-            <input />
+            <label for="firstname">Prénom</label>
+            <input name="Prénom" id="firstname" type="text" required />
+            <label for="lastname">Nom</label>
+            <input name="Nom" id="lastname" type="text" required />
+            <label for="email">Email</label>
+            <input name="Email" id="email" type="email" required />
+            <label for="message">Votre message</label>
+            <textarea name="Message" id="message" required></textarea>
           </div>
           <button class="contact-button">Envoyer</button>
         </form>
       </div>
-    </div>
+    </section>
     <script src="scripts/utils/fetchData.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/factories/PhotographerFactory.js"></script>

@@ -1,7 +1,3 @@
-#contact-modal {
-  display: none;
-}
-
 .photograph-header {
   background-color: #fafafa;
   height: 300px;
@@ -60,11 +56,14 @@
   text-align: center;
 }
 
-.contact-button:hover {
+#main.contact-button:hover,
+#main.contact-button:focus {
   background-color: #db8876;
   color: black;
   cursor: pointer;
 }
+
+/* ---------------------------- MEDIA SECTION ------------------------------------ */
 
 .media-section {
   margin: 20px 100px;
@@ -117,6 +116,8 @@
   margin-left: 23px;
 }
 
+/* ------------------------------ DROPDOWN MENU ---------------------------------- */
+
 ul#hidden-sorting {
   font-size: 18px;
   font-weight: bold;
@@ -142,6 +143,7 @@ ul#hidden-sorting {
 
 ul#hidden-sorting.display {
   display: flex;
+  z-index: 1;
 }
 
 ul#hidden-sorting hr {
@@ -188,6 +190,8 @@ ul#hidden-sorting li:last-child:hover {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
+
+/* ------------------------------ MEDIA CARDS ---------------------------------- */
 
 .media-container {
   display: grid;
@@ -260,22 +264,45 @@ ul#hidden-sorting li:last-child:hover {
   padding: 0 31px;
 }
 
-/* ---------------------------------------------------------------- */
+/* ----------------------------- MODAL -------------------------------- */
+
+.transparent {
+  opacity: 0.4;
+}
+
+.contact-modal {
+  display: none;
+}
+
+.contact-modal.displayModal {
+  display: block;
+}
 
 .modal {
   border-radius: 5px;
   background-color: #db8876;
-  width: 50%;
+
+  width: 670px;
+  height: 900px;
+  padding: 35px;
+  margin: auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  padding: 35px;
-  margin: auto;
+
+  position: absolute;
+  top: 56px;
+  left: 25%;
+  z-index: 2;
+
+  box-shadow: ;
 }
 
 .modal header {
   justify-content: space-between;
+  align-items: baseline;
   width: 100%;
 }
 
@@ -286,7 +313,15 @@ ul#hidden-sorting li:last-child:hover {
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
-  text-align: center;
+  text-align: start;
+  /* width: 50%; */
+}
+
+.modal h2 {
+  font-size: 64px;
+  font-weight: normal;
+  /* justify-self: left; */
+  margin: 0 auto 0 0;
 }
 
 form {
@@ -314,4 +349,22 @@ form input {
   height: 68px;
   border: none;
   border-radius: 5px;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+form textarea {
+  width: 100%;
+  height: 170px;
+  border: none;
+  border-radius: 5px;
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+form .contact-button:hover,
+form .contact-button:focus {
+  background-color: #7a1515;
+  /* color: black; */
+  cursor: pointer;
 }
