@@ -197,7 +197,8 @@ ul#hidden-sorting li:last-child:hover {
   margin: 25px 0;
 }
 
-.media-container article img {
+.media-container article img,
+.media-container article video {
   height: 300px;
   width: 350px;
 

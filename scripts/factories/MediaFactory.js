@@ -1,23 +1,44 @@
 function mediaFactory(data) {
-  const { id, photographerId, title, image, likes, date, price } = data;
+  const { id, photographerId, title, image, video, likes, date, price } = data;
 
   const picture = `assets/images/${image}`;
+  const video_source = `assets/images/${video}`;
 
   function getMediaCardDOM() {
     // Création de l'élément DOM : article
     const article = document.createElement("article");
 
-    // Création du lien : img
+    // Création du lien : img ou video
     const link = document.createElement("a");
     link.id = `${id}`;
     link.setAttribute("href", `/photographer.html?id=${id}`);
 
-    const img = document.createElement("img");
-    img.setAttribute("src", picture);
-    // Texte alternatif vide selon la maquette Figma
-    img.setAttribute("alt", "");
+    if (image) {
+      const img = document.createElement("img");
+      img.setAttribute("src", picture);
+      // Texte alternatif vide selon la maquette Figma
+      img.setAttribute("alt", "");
 
-    link.appendChild(img);
+      link.appendChild(img);
+    } else if (video) {
+      const vid = document.createElement("video");
+      vid.textContent = "Sorry, your browser doesn't support embedded videos.";
+
+      vid.setAttribute("controls", "");
+
+      const src = document.createElement("source");
+      src.setAttribute("src", video_source);
+      src.setAttribute(
+        "type",
+        "video/" + video_source.substring(video_source.indexOf(".") + 1)
+      );
+
+      vid.insertBefore(src, vid.firstChild);
+      // vid.appendChild(src);
+      // vid.textContent = "Sorry, your browser doesn't support embedded videos.";
+
+      link.appendChild(vid);
+    }
     // ------------------------------------------------
 
     // Création du media title container :
