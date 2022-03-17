@@ -81,6 +81,30 @@
         </form>
       </div>
     </section>
+    <section class="lightbox-section">
+      <div id="lightbox-container">
+        <img
+          src="assets/icons/close_red.svg"
+          id="closeLightBox"
+          onclick="closeLightBox()"
+        />
+        <div id="left-LB-container">
+          <img
+            src="assets/icons/previous.svg"
+            class="arrowLightBox"
+            onclick="previousMedia()"
+          />
+        </div>
+        <div id="center-LB-container"></div>
+        <div id="right-LB-container">
+          <img
+            src="assets/icons/next.svg"
+            class="arrowLightBox"
+            onclick="nextMedia()"
+          />
+        </div>
+      </div>
+    </section>
     <script src="scripts/utils/fetchData.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/factories/PhotographerFactory.js"></script>

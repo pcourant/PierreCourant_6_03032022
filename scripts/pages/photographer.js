@@ -193,6 +193,20 @@ async function submitFormOnClick(photographerModel) {
   });
 }
 
+async function displayLightBox() {
+  document.querySelector("body > header").classList.add("transparent");
+  document.getElementById("main").classList.add("transparent");
+  document.querySelector(".lightbox-section").classList.add("displayLightBox");
+}
+
+async function closeLightBox() {
+  document
+    .querySelector(".lightbox-section")
+    .classList.remove("displayLightBox");
+  document.querySelector("body > header").classList.remove("transparent");
+  document.getElementById("main").classList.remove("transparent");
+}
+
 async function init() {
   const photographerId = await getPhotographerIdFromURL();
   const photographer = await getPhotographer(photographerId);

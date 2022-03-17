@@ -1,5 +1,5 @@
 function mediaFactory(data) {
-  let { id, photographerId, title, image, video, likes, date, price } = data;
+  let { id, photographerId, title, image, video, likes, date } = data;
 
   const picture = `assets/images/${image}`;
   const video_source = `assets/images/${video}`;
@@ -11,22 +11,19 @@ function mediaFactory(data) {
     const article = document.createElement("article");
 
     // Création du lien : img ou video
-    const link = document.createElement("a");
-    link.id = `${id}`;
-    link.setAttribute("href", `/photographer.html?id=${id}`);
-
     if (image) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
       img.setAttribute("alt", "");
+      img.setAttribute("onclick", "displayLightBox()");
 
-      link.appendChild(img);
+      article.appendChild(img);
     } else if (video) {
       const vid = document.createElement("video");
       vid.textContent = "Sorry, your browser doesn't support embedded videos.";
-
       vid.setAttribute("controls", "");
+      vid.setAttribute("onclick", "displayLightBox()");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -36,7 +33,7 @@ function mediaFactory(data) {
       );
 
       vid.insertBefore(src, vid.firstChild);
-      link.appendChild(vid);
+      article.appendChild(vid);
     }
     // ------------------------------------------------
 
@@ -63,12 +60,10 @@ function mediaFactory(data) {
 
     divTitle.appendChild(titleParagraph);
     divTitle.appendChild(likesParagraph);
+    article.appendChild(divTitle);
     // ------------------------------------------------
 
-    // Création de la structure DOM de l'article
-    article.appendChild(link);
-    article.appendChild(divTitle);
-
+    //Save the DOM
     this.mediaCardDOM = article;
 
     return article;
