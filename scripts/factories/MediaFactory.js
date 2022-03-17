@@ -5,25 +5,25 @@ function mediaFactory(data) {
   const video_source = `assets/images/${video}`;
   let liked = false;
   let mediaCardDOM = undefined;
+  let mediaLightBoxDOM = undefined;
 
   function getMediaCardDOM() {
     // Création de l'élément DOM : article
     const article = document.createElement("article");
 
-    // Création du lien : img ou video
+    // Création de l'image...
     if (image) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
       img.setAttribute("alt", "");
-      img.setAttribute("onclick", "displayLightBox()");
-
       article.appendChild(img);
-    } else if (video) {
+    }
+    // ... ou de la vidéo
+    else if (video) {
       const vid = document.createElement("video");
       vid.textContent = "Sorry, your browser doesn't support embedded videos.";
       vid.setAttribute("controls", "");
-      vid.setAttribute("onclick", "displayLightBox()");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -69,6 +69,39 @@ function mediaFactory(data) {
     return article;
   }
 
+  function getMediaLightBoxDOM() {
+    let DOMelement = null;
+
+    // Création de l'image...
+    if (image) {
+      DOMelement = document.createElement("img");
+      DOMelement.setAttribute("src", picture);
+      // Texte alternatif vide selon la maquette Figma
+      DOMelement.setAttribute("alt", "");
+    }
+    // ... ou de la vidéo
+    else if (video) {
+      DOMelement = document.createElement("video");
+      DOMelement.textContent =
+        "Sorry, your browser doesn't support embedded videos.";
+      DOMelement.setAttribute("controls", "");
+
+      const src = document.createElement("source");
+      src.setAttribute("src", video_source);
+      src.setAttribute(
+        "type",
+        "video/" + video_source.substring(video_source.indexOf(".") + 1)
+      );
+
+      DOMelement.insertBefore(src, DOMelement.firstChild);
+    }
+
+    DOMelement.id = this.id;
+    this.mediaLightBoxDOM = DOMelement;
+
+    return DOMelement;
+  }
+
   function toggleLikes() {
     if (!this.liked) {
       this.likes++;
@@ -92,7 +125,9 @@ function mediaFactory(data) {
     date,
     likes,
     mediaCardDOM,
+    mediaLightBoxDOM,
     getMediaCardDOM,
     toggleLikes,
+    getMediaLightBoxDOM,
   };
 }

@@ -399,7 +399,7 @@ form .contact-button:focus {
 
 #lightbox-container {
   border-radius: 5px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.8);
 
   width: calc((100vh - 40px) * 1.27);
   /* width: 50%; */
@@ -419,35 +419,23 @@ form .contact-button:focus {
   box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
 }
 
-/* .modal header {
-  justify-content: space-between;
-  align-items: baseline;
-  width: 100%;
-} */
-
-#lightbox-container img {
-  /* width: 50%; */
-  /* height: auto; */
-  cursor: pointer;
-}
-
 #center-LB-container {
   width: 80%;
   height: 90%;
   background-color: #db8876;
 }
 
-#left-LB-container,
-#right-LB-container {
+#previous-LB-container,
+#next-LB-container {
   width: 10%;
 }
 
-#left-LB-container {
+#previous-LB-container {
   /* align-self: center; */
   text-align: center;
 }
 
-#right-LB-container {
+#next-LB-container {
   /* align-self: flex-start; */
 
   display: flex;
@@ -458,11 +446,23 @@ form .contact-button:focus {
   /* padding: 5% 0; */
 }
 
-#closeLightBox {
+#close-LB {
   width: 3.5%;
 
   position: absolute;
 
   top: 7%;
   right: 3%;
+}
+
+.icon-LB {
+  cursor: pointer;
+}
+
+#center-LB-container img,
+#center-LB-container video {
+  height: 100%;
+  width: 100%;
+
+  object-fit: cover;
 }

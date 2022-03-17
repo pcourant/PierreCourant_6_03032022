@@ -101,6 +101,7 @@ async function getAllMediaModels(medias) {
   medias.forEach((media) => {
     const mediaModel = mediaFactory(media);
     mediaModel.getMediaCardDOM();
+    mediaModel.getMediaLightBoxDOM();
     mediaModels.push(mediaModel);
   });
   return mediaModels;
@@ -205,6 +206,73 @@ async function closeLightBox() {
     .classList.remove("displayLightBox");
   document.querySelector("body > header").classList.remove("transparent");
   document.getElementById("main").classList.remove("transparent");
+
+  const centerLB = document.getElementById("center-LB-container");
+  centerLB.removeChild(centerLB.firstChild);
+}
+
+async function displayLightBoxOnClick(mediaModels) {
+  mediaModels.forEach((mediaModel) => {
+    let mediaDOM = mediaModel.mediaCardDOM.querySelector("article img");
+    if (!mediaDOM) {
+      mediaDOM = mediaModel.mediaCardDOM.querySelector("article video");
+    }
+
+    mediaDOM.addEventListener("click", (e) => {
+      // Empêche le navigateur de lire la vidéo lorsque l'on clique dessus
+      e.preventDefault();
+      // console.log(mediaDOM);
+
+      // On vérifie si la lightbox n'est pas déjà ouverte
+      if (document.querySelector(".lightbox-section.displayLightBox")) {
+        console.log("Do nothing => la lightbox est déjà ouverte");
+      } else {
+        // Ajoute le media à la lightbox
+        document
+          .getElementById("center-LB-container")
+          .appendChild(mediaModel.mediaLightBoxDOM);
+        displayLightBox();
+      }
+    });
+  });
+}
+
+async function navigationLightBoxOnClick(mediaModels) {
+  const previousDom = document.getElementById("previous-chevron-LB");
+  const nextDom = document.getElementById("next-chevron-LB");
+  const centerLB = document.getElementById("center-LB-container");
+
+  nextDom.addEventListener("click", (e) => {
+    const currentMedia = mediaModels.find(
+      (x) => `${x.id}` === centerLB.firstChild.id
+    );
+    let nextMediaIndex = mediaModels.indexOf(currentMedia) + 1;
+    if (nextMediaIndex > mediaModels.length - 1) {
+      nextMediaIndex = 0;
+    }
+    const nextMedia = mediaModels[nextMediaIndex];
+
+    // console.log(currentMedia);
+    // console.log(nextMedia);
+    // console.log(mediaModels);
+
+    centerLB.removeChild(centerLB.firstChild);
+    centerLB.appendChild(nextMedia.mediaLightBoxDOM);
+  });
+
+  previousDom.addEventListener("click", (e) => {
+    const currentMedia = mediaModels.find(
+      (x) => `${x.id}` === centerLB.firstChild.id
+    );
+    let previousMediaIndex = mediaModels.indexOf(currentMedia) - 1;
+    if (previousMediaIndex < 0) {
+      previousMediaIndex = mediaModels.length - 1;
+    }
+    const previousMedia = mediaModels[previousMediaIndex];
+
+    centerLB.removeChild(centerLB.firstChild);
+    centerLB.appendChild(previousMedia.mediaLightBoxDOM);
+  });
 }
 
 async function init() {
@@ -224,6 +292,8 @@ async function init() {
   displayMedias(mediaModels.sort(getSortingFunction("Popularité")));
   toggleLikesOnClick(mediaModels);
   displayDropDown(mediaModels);
+  displayLightBoxOnClick(mediaModels);
+  navigationLightBoxOnClick(mediaModels);
 }
 
 init();
