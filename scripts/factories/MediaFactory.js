@@ -93,6 +93,8 @@ function mediaFactory(data) {
   return {
     id,
     photographerId,
+    title,
+    date,
     likes,
     mediaCardDOM,
     getMediaCardDOM,

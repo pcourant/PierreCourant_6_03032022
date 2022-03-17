@@ -246,9 +246,17 @@ ul#hidden-sorting li:last-child:hover {
 }
 
 .media-title-container .media-likes:hover {
-  color: #7a1515;
   cursor: pointer;
+  color: #db8876;
 }
+
+/* .media-title-container .media-likes:hover .media-likes-span {
+  color: black;
+}
+
+.media-title-container .media-likes:hover i {
+  color: #db8876;
+} */
 
 /* ---------------------------------------------------------------- */
 

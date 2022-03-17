@@ -1,69 +1,84 @@
+const popularSorting = (a, b) => {
+  return b.likes - a.likes;
+};
+const dateSorting = (a, b) => {
+  if (a.date <= b.date) {
+    return -1;
+  } else {
+    return 1;
+  }
+};
+const titleSorting = (a, b) => {
+  if (a.title.toLowerCase() <= b.title.toLowerCase()) {
+    return -1;
+  } else {
+    return 1;
+  }
+};
+
+const SORTING_FUNCTIONS_ENUM = [
+  ["Popularité", popularSorting],
+  ["Date", dateSorting],
+  ["Titre", titleSorting],
+];
+
+function getSortingFunction(name) {
+  return SORTING_FUNCTIONS_ENUM.find((array) => `${array[0]}` === name)[1];
+}
+
 // Ouverture du menu dropdown
 // @data: les medias du photographe à trier
-async function displayDropDown(data) {
-  let arrowOpen = document.getElementById("arrow-down-open");
-  let arrowClose = document.getElementById("arrow-up-close");
+async function displayDropDown(mediaModels) {
+  // const arrowOpen = document.getElementById("arrow-down-open");
+  const sortingBtn = document.getElementById("sorting-btn");
+  const arrowClose = document.getElementById("arrow-up-close");
 
   // le DOM element du dropdown menu
-  let hiddenSorting = document.getElementById("hidden-sorting");
+  const hiddenSorting = document.getElementById("hidden-sorting");
 
-  // Ajout des event listeners sur les chevrons haut et bas du dropdown menu "trier par"
-  arrowOpen.addEventListener("click", () => {
+  // Ajout des event listeners sur le bouton et le chevron haut du dropdown menu "trier par"
+  sortingBtn.addEventListener("click", () => {
     hiddenSorting.classList.add("display");
   });
   arrowClose.addEventListener("click", () => {
     hiddenSorting.classList.remove("display");
   });
 
-  // Ajout des event listeners sur les éléments du dropdown menu
-  sortMedias(data);
+  // Ajout des event listeners sur les éléments du dropdown menu pour trier les médias
+  sortMedias(mediaModels);
 }
 
 // Ajout des event listeners sur les éléments du dropdown menu
-async function sortMedias(data) {
-  // let medias_sorted_array = [];
-  // const MEDIAS = data.dataMedias;
-  let btnSorting = document.getElementById("sorting-btn");
-  let hiddenSorting = document.getElementById("hidden-sorting");
-  let sortingItems = Array.from(document.getElementsByClassName("sorting"));
+async function sortMedias(mediaModels) {
+  const btnSorting = document.getElementById("sorting-btn");
+  const hiddenSorting = document.getElementById("hidden-sorting");
+  const sortingItems = Array.from(document.getElementsByClassName("sorting"));
 
   sortingItems.forEach((item, index) =>
     item.addEventListener("click", () => {
-      hiddenSorting.classList.remove("display");
-      let newSorting = item.querySelector("span").textContent;
-      let oldSorting = sortingItems[0].querySelector("span").textContent;
-      if (index === 0) {
-        // btnSorting.querySelector("span").textContent = `Popularité`;
-        // item.parentNode.insertBefore(item, item.parentNode.firstChild);
-        // Trier par popularité
-        // medias_sorted_array = MEDIAS.sort((a, b) => {
-        //   return b.likes - a.likes;
-        // });
-      } else if (index === 1) {
+      // Si un autre classement est demandé par l'utilisateur
+      if (index !== 0) {
+        const newSorting = item.querySelector("span").textContent;
+        const oldSorting = sortingItems[0].querySelector("span").textContent;
+
+        // Trie et affiche les medias
+        mediaModels.sort(getSortingFunction(newSorting));
+        displayMedias(mediaModels);
+
+        // Met à jour le bouton de tri
         btnSorting.querySelector("span").textContent = newSorting;
+        // Retracte le drop down menu
+        hiddenSorting.classList.remove("display");
+
+        // Intervertie les entrées du drop down menu
         sortingItems[0].querySelector("span").textContent = newSorting;
         item.querySelector("span").textContent = oldSorting;
-
-        // Trier par date
-        // medias_sorted_array = MEDIAS.sort((a, b) => {
-        //   return new Date(a.date).valueOf() - new Date(b.date).valueOf();
-        // });
-      } else if (index === 2) {
-        btnSorting.querySelector("span").textContent = newSorting;
-        sortingItems[0].querySelector("span").textContent = newSorting;
-        item.querySelector("span").textContent = oldSorting;
-
-        // Trier par titre
-        // medias_sorted_array = MEDIAS.sort((a, b) => {
-        //   if (a.photoName.toLowerCase() < b.photoName.toLowerCase()) {
-        //     return -1;
-        //   } else if (a.photoName.toLowerCase() > b.photoName.toLowerCase()) {
-        //     return 1;
-        //   }
-        // });
       }
-      // Affichage des médias triés
-      // this.displaySortMedia(medias_sorted_array);
+      // Si aucun changement de tri
+      else {
+        // Retracte le drop down menu
+        hiddenSorting.classList.remove("display");
+      }
     })
   );
 }
@@ -119,12 +134,6 @@ async function toggleLikesOnClick(mediaModels) {
         displayLikes(mediaModels);
       });
   });
-
-  // document.querySelectorAll(".media-likes").forEach((dom) => {
-  //   dom.addEventListener("click", () => {
-  //     console.log(dom);
-  //   });
-  // });
 }
 
 async function displayLikes(mediaModels) {
@@ -194,14 +203,13 @@ async function init() {
   displayModalHeaderH2(photographerModel);
   submitFormOnClick(photographerModel);
 
-  displayDropDown(null);
-
   // Récupère les medias du photographe
   const medias = await getMediasOfPhotographer(photographerId);
   const mediaModels = await getAllMediaModels(medias);
   displayLikes(mediaModels);
-  displayMedias(mediaModels);
+  displayMedias(mediaModels.sort(getSortingFunction("Popularité")));
   toggleLikesOnClick(mediaModels);
+  displayDropDown(mediaModels);
 }
 
 init();
