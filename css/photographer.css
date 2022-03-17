@@ -56,8 +56,8 @@
   text-align: center;
 }
 
-#main.contact-button:hover,
-#main.contact-button:focus {
+#main .contact-button:hover,
+#main .contact-button:focus {
   background-color: #db8876;
   color: black;
   cursor: pointer;
@@ -110,6 +110,12 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#sorting-btn:hover {
+  background-color: #db8876;
+  color: black;
+  cursor: pointer;
 }
 
 #arrow-down-open {
@@ -297,7 +303,7 @@ ul#hidden-sorting li:last-child:hover {
   left: 25%;
   z-index: 2;
 
-  box-shadow: ;
+  box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0.3);
 }
 
 .modal header {
