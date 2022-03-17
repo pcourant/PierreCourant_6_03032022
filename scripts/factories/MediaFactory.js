@@ -1,8 +1,10 @@
 function mediaFactory(data) {
-  const { id, photographerId, title, image, video, likes, date, price } = data;
+  let { id, photographerId, title, image, video, likes, date, price } = data;
 
   const picture = `assets/images/${image}`;
   const video_source = `assets/images/${video}`;
+  let liked = false;
+  let mediaCardDOM = undefined;
 
   function getMediaCardDOM() {
     // Création de l'élément DOM : article
@@ -47,7 +49,12 @@ function mediaFactory(data) {
 
     const likesParagraph = document.createElement("p");
     likesParagraph.classList.add("media-likes");
-    likesParagraph.textContent = likes;
+
+    const likesSpan = document.createElement("span");
+    likesSpan.classList.add("media-likes-span");
+    likesSpan.textContent = likes;
+    likesParagraph.appendChild(likesSpan);
+
     const heartIcon = document.createElement("i");
     heartIcon.classList.add("fa");
     heartIcon.classList.add("fa-heart");
@@ -62,7 +69,33 @@ function mediaFactory(data) {
     article.appendChild(link);
     article.appendChild(divTitle);
 
+    this.mediaCardDOM = article;
+
     return article;
   }
-  return { id, photographerId, likes, getMediaCardDOM };
+
+  function toggleLikes() {
+    if (!this.liked) {
+      this.likes++;
+      this.liked = true;
+    } else {
+      this.likes--;
+      this.liked = false;
+    }
+
+    // Update le nombre de likes affiché dans le DOM
+    if (this.mediaCardDOM) {
+      this.mediaCardDOM.querySelector(".media-likes-span").textContent =
+        this.likes;
+    }
+  }
+
+  return {
+    id,
+    photographerId,
+    likes,
+    mediaCardDOM,
+    getMediaCardDOM,
+    toggleLikes,
+  };
 }

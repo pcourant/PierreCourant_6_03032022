@@ -1,6 +1,6 @@
 // Ouverture du menu dropdown
 // @data: les medias du photographe à trier
-function displayDropDown(data) {
+async function displayDropDown(data) {
   let arrowOpen = document.getElementById("arrow-down-open");
   let arrowClose = document.getElementById("arrow-up-close");
 
@@ -20,14 +20,12 @@ function displayDropDown(data) {
 }
 
 // Ajout des event listeners sur les éléments du dropdown menu
-function sortMedias(data) {
+async function sortMedias(data) {
   // let medias_sorted_array = [];
   // const MEDIAS = data.dataMedias;
   let btnSorting = document.getElementById("sorting-btn");
   let hiddenSorting = document.getElementById("hidden-sorting");
   let sortingItems = Array.from(document.getElementsByClassName("sorting"));
-
-  console.log(sortingItems);
 
   sortingItems.forEach((item, index) =>
     item.addEventListener("click", () => {
@@ -71,32 +69,71 @@ function sortMedias(data) {
 }
 
 // Récupère l'ID du photographe
-function getPhotographerIdFromURL() {
+async function getPhotographerIdFromURL() {
   const parsedUrl = new URL(window.location.href);
   const id = parsedUrl.searchParams.get("id");
-  // console.log("id", id);
   return id;
 }
 
-function displayPhotographHeader(photographerModel) {
+async function displayPhotographHeader(photographerModel) {
   const photographHeader = document.querySelector(".photograph-header");
 
   photographerModel.constructPhotographHeaderDOM(photographHeader);
 }
 
-async function displayMedias(medias) {
-  const mediaContainer = document.querySelector(".media-container");
-
+async function getAllMediaModels(medias) {
+  const mediaModels = new Array();
   medias.forEach((media) => {
     const mediaModel = mediaFactory(media);
-    // console.log(mediaModel);
-    // console.log(mediaModel.id);
-    const mediaCardDOM = mediaModel.getMediaCardDOM();
-    mediaContainer.appendChild(mediaCardDOM);
+    mediaModel.getMediaCardDOM();
+    mediaModels.push(mediaModel);
+  });
+  return mediaModels;
+}
+
+async function displayMedias(mediaModels) {
+  const mediaContainer = document.querySelector(".media-container");
+
+  mediaModels.forEach((mediaModel) => {
+    mediaContainer.appendChild(mediaModel.mediaCardDOM);
   });
 }
 
-async function displayLikesAndPrice(photographerModel) {
+async function getTotalLikes(mediaModels) {
+  let totalLikes = 0;
+  mediaModels.forEach((mediaModel) => {
+    totalLikes += mediaModel.likes;
+  });
+
+  return totalLikes;
+}
+
+async function toggleLikesOnClick(mediaModels) {
+  mediaModels.forEach((mediaModel) => {
+    mediaModel.mediaCardDOM
+      .querySelector(".media-likes")
+      .addEventListener("click", () => {
+        // console.log(mediaModel.mediaCardDOM);
+        // e.preventDefault();
+        mediaModel.toggleLikes();
+        displayLikes(mediaModels);
+      });
+  });
+
+  // document.querySelectorAll(".media-likes").forEach((dom) => {
+  //   dom.addEventListener("click", () => {
+  //     console.log(dom);
+  //   });
+  // });
+}
+
+async function displayLikes(mediaModels) {
+  const likesContainer = document.getElementById("likes-container");
+
+  likesContainer.textContent = await getTotalLikes(mediaModels);
+}
+
+async function displayPrice(photographerModel) {
   const priceContainer = document.getElementById("price-container");
 
   priceContainer.textContent = photographerModel.price;
@@ -148,13 +185,12 @@ async function submitFormOnClick(photographerModel) {
 }
 
 async function init() {
-  const photographerId = getPhotographerIdFromURL();
+  const photographerId = await getPhotographerIdFromURL();
   const photographer = await getPhotographer(photographerId);
-  // console.log("photographer", photographer);
-  const photographerModel = photographerFactory(photographer);
 
+  const photographerModel = await photographerFactory(photographer);
   displayPhotographHeader(photographerModel);
-  displayLikesAndPrice(photographerModel);
+  displayPrice(photographerModel);
   displayModalHeaderH2(photographerModel);
   submitFormOnClick(photographerModel);
 
@@ -162,8 +198,10 @@ async function init() {
 
   // Récupère les medias du photographe
   const medias = await getMediasOfPhotographer(photographerId);
-  // console.log(medias);
-  displayMedias(medias);
+  const mediaModels = await getAllMediaModels(medias);
+  displayLikes(mediaModels);
+  displayMedias(mediaModels);
+  toggleLikesOnClick(mediaModels);
 }
 
 init();

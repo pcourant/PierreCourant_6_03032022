@@ -2,6 +2,7 @@ function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
 
   const picture = `assets/photographers/${portrait}`;
+  let totalLikes = 0;
 
   function getUserCardDOM() {
     // Création de l'élément DOM : article

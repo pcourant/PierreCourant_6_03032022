@@ -245,6 +245,11 @@ ul#hidden-sorting li:last-child:hover {
   margin-left: 7px;
 }
 
+.media-title-container .media-likes:hover {
+  color: #7a1515;
+  cursor: pointer;
+}
+
 /* ---------------------------------------------------------------- */
 
 #likes-price-container {
@@ -371,6 +376,5 @@ form textarea {
 form .contact-button:hover,
 form .contact-button:focus {
   background-color: #7a1515;
-  /* color: black; */
   cursor: pointer;
 }
