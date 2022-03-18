@@ -16,7 +16,7 @@ function mediaFactory(data) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
-      img.setAttribute("alt", "");
+      img.setAttribute("alt", " ");
       article.appendChild(img);
     }
     // ... ou de la vidéo
@@ -80,7 +80,7 @@ function mediaFactory(data) {
       mediaDOM = document.createElement("img");
       mediaDOM.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
-      mediaDOM.setAttribute("alt", "");
+      mediaDOM.setAttribute("alt", " ");
     }
     // ... ou de la vidéo
     else if (video) {

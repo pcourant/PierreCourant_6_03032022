@@ -213,6 +213,7 @@ ul#hidden-sorting li:last-child:hover {
   height: 300px;
   width: 350px;
   background: #c4c4c4;
+  border-radius: 5px;
 
   object-fit: cover;
   cursor: pointer;
