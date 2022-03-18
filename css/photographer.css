@@ -37,6 +37,7 @@
   width: 200px;
   border-radius: 50%;
 
+  background: #c4c4c4;
   object-fit: cover;
 }
 
@@ -211,6 +212,7 @@ ul#hidden-sorting li:last-child:hover {
 .media-container article video {
   height: 300px;
   width: 350px;
+  background: #c4c4c4;
 
   object-fit: cover;
   cursor: pointer;
@@ -421,8 +423,7 @@ form .contact-button:focus {
 
 #center-LB-container {
   width: 80%;
-  height: 90%;
-  background-color: #db8876;
+  height: 100%;
 }
 
 #previous-LB-container,
@@ -459,10 +460,34 @@ form .contact-button:focus {
   cursor: pointer;
 }
 
+#center-LB-container article {
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+
+  padding-top: 3%;
+}
+
 #center-LB-container img,
 #center-LB-container video {
-  height: 100%;
+  height: 90%;
   width: 100%;
 
   object-fit: cover;
+  border-radius: 5px;
+
+  background-color: #c4c4c4;
+  box-shadow: 3px 0px 0px 0px rgb(196, 196, 196);
+}
+
+#center-LB-container p {
+  color: #901c1c;
+  font-size: 24px;
+  font-weight: 400;
+
+  margin: 1% 0 0 0;
+  padding: 0;
 }

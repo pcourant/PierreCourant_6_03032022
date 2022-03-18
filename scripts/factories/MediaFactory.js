@@ -70,21 +70,24 @@ function mediaFactory(data) {
   }
 
   function getMediaLightBoxDOM() {
-    let DOMelement = null;
+    // Création de l'élément DOM : article
+    const article = document.createElement("article");
+    const titleParagraph = document.createElement("p");
+    let mediaDOM = null;
 
     // Création de l'image...
     if (image) {
-      DOMelement = document.createElement("img");
-      DOMelement.setAttribute("src", picture);
+      mediaDOM = document.createElement("img");
+      mediaDOM.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
-      DOMelement.setAttribute("alt", "");
+      mediaDOM.setAttribute("alt", "");
     }
     // ... ou de la vidéo
     else if (video) {
-      DOMelement = document.createElement("video");
-      DOMelement.textContent =
+      mediaDOM = document.createElement("video");
+      mediaDOM.textContent =
         "Sorry, your browser doesn't support embedded videos.";
-      DOMelement.setAttribute("controls", "");
+      mediaDOM.setAttribute("controls", "");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -93,13 +96,19 @@ function mediaFactory(data) {
         "video/" + video_source.substring(video_source.indexOf(".") + 1)
       );
 
-      DOMelement.insertBefore(src, DOMelement.firstChild);
+      mediaDOM.insertBefore(src, mediaDOM.firstChild);
     }
+    //-------------------------------------------------------------------
 
-    DOMelement.id = this.id;
-    this.mediaLightBoxDOM = DOMelement;
+    titleParagraph.textContent = title;
 
-    return DOMelement;
+    article.appendChild(mediaDOM);
+    article.appendChild(titleParagraph);
+
+    article.id = this.id;
+    this.mediaLightBoxDOM = article;
+
+    return article;
   }
 
   function toggleLikes() {
