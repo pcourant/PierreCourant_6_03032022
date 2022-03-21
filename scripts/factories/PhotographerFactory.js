@@ -11,12 +11,12 @@ function photographerFactory(data) {
     // Création du lien : img + h2
     const link = document.createElement("a");
     link.id = `${id}`;
-    link.setAttribute("href", `/photographer.html?id=${id}`);
+    link.setAttribute("href", `photographer.html?id=${id}`);
 
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     // Texte alternatif vide selon la maquette Figma
-    img.setAttribute("alt", "");
+    img.setAttribute("alt", " ");
     const h2 = document.createElement("h2");
     h2.textContent = name;
     link.appendChild(img);
@@ -46,12 +46,13 @@ function photographerFactory(data) {
 
   function constructPhotographHeaderDOM(photographHeader) {
     // Création de l'élément DOM de description : div
-    const description = document.createElement("div");
-    description.classList.add("phtographer-profile");
+    const description = document.createElement("article");
+    description.setAttribute("aria-label", "Photographer profil");
+    description.classList.add("photographer-profile");
 
     // Création des éléments descriptifs
-    const h2 = document.createElement("h2");
-    h2.textContent = name;
+    const h1 = document.createElement("h1");
+    h1.textContent = name;
     const locationParagraph = document.createElement("p");
     locationParagraph.classList.add("location");
     locationParagraph.textContent = `${city}, ${country}`;
@@ -59,7 +60,7 @@ function photographerFactory(data) {
     taglineParagraph.classList.add("tagline");
     taglineParagraph.textContent = tagline;
 
-    description.appendChild(h2);
+    description.appendChild(h1);
     description.appendChild(locationParagraph);
     description.appendChild(taglineParagraph);
 
@@ -67,7 +68,7 @@ function photographerFactory(data) {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     // Texte alternatif vide selon la maquette Figma
-    img.setAttribute("alt", "");
+    img.setAttribute("alt", name);
 
     // Création du DOM
     photographHeader.insertBefore(description, photographHeader.firstChild);
