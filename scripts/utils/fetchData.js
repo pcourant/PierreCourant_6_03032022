@@ -28,7 +28,7 @@ function fetchJSON(...args) {
 }
 
 async function getPhotographers() {
-  return fetchJSON("/data/photographers.json")
+  return fetchJSON("data/photographers.json")
     .then((data) => data.photographers)
     .catch((error) => {
       console.error(error);
