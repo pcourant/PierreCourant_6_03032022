@@ -38,47 +38,50 @@ async function displayDropDown(mediaModels) {
 
   // Ajout des event listeners sur le bouton et le chevron haut du dropdown menu "trier par"
   sortingBtn.addEventListener("click", () => {
+    sortingBtn.setAttribute("aria-expanded", "true");
     hiddenSorting.classList.add("display");
   });
   arrowClose.addEventListener("click", () => {
+    sortingBtn.setAttribute("aria-expanded", "false");
     hiddenSorting.classList.remove("display");
   });
 
   // Ajout des event listeners sur les éléments du dropdown menu pour trier les médias
-  sortMedias(mediaModels);
+  sortMediasOnClick(mediaModels);
 }
 
 // Ajout des event listeners sur les éléments du dropdown menu
-async function sortMedias(mediaModels) {
-  const btnSorting = document.getElementById("sorting-btn");
+async function sortMediasOnClick(mediaModels) {
+  const sortingBtn = document.getElementById("sorting-btn");
   const hiddenSorting = document.getElementById("hidden-sorting");
-  const sortingItems = Array.from(document.getElementsByClassName("sorting"));
+  const sortingListItems = Array.from(
+    document.getElementsByClassName("sorting")
+  );
 
-  sortingItems.forEach((item, index) =>
+  sortingListItems.forEach((item, index) =>
     item.addEventListener("click", () => {
-      // Si un autre classement est demandé par l'utilisateur
+      // Si un autre classement est demandé (autre que celui déjà effectif)
       if (index !== 0) {
-        const newSorting = item.querySelector("span").textContent;
-        const oldSorting = sortingItems[0].querySelector("span").textContent;
+        // Récupère les infos du tri actuel
+        const newSortingName = item.querySelector("span").textContent;
+        const oldSortingName =
+          sortingListItems[0].querySelector("span").textContent;
 
         // Trie et affiche les medias
-        mediaModels.sort(getSortingFunction(newSorting));
+        mediaModels.sort(getSortingFunction(newSortingName));
         displayMedias(mediaModels);
 
         // Met à jour le bouton de tri
-        btnSorting.querySelector("span").textContent = newSorting;
-        // Retracte le drop down menu
-        hiddenSorting.classList.remove("display");
+        sortingBtn.querySelector("span").textContent = newSortingName;
 
         // Intervertie les entrées du drop down menu
-        sortingItems[0].querySelector("span").textContent = newSorting;
-        item.querySelector("span").textContent = oldSorting;
+        sortingListItems[0].querySelector("span").textContent = newSortingName;
+        item.querySelector("span").textContent = oldSortingName;
       }
-      // Si aucun changement de tri
-      else {
-        // Retracte le drop down menu
-        hiddenSorting.classList.remove("display");
-      }
+
+      // Retracte le drop down menu
+      hiddenSorting.classList.remove("display");
+      sortingBtn.setAttribute("aria-expanded", "false");
     })
   );
 }
@@ -197,13 +200,14 @@ async function submitFormOnClick(photographerModel) {
 async function displayLightBox() {
   document.querySelector("body > header").classList.add("transparent");
   document.getElementById("main").classList.add("transparent");
-  document.querySelector(".lightbox-section").classList.add("displayLightBox");
+
+  const lightboxDOM = document.querySelector(".lightbox-aside");
+  // lightboxDOM.removeAttribute("role");
+  lightboxDOM.classList.add("displayLightBox");
 }
 
 async function closeLightBox() {
-  document
-    .querySelector(".lightbox-section")
-    .classList.remove("displayLightBox");
+  document.querySelector(".lightbox-aside").classList.remove("displayLightBox");
   document.querySelector("body > header").classList.remove("transparent");
   document.getElementById("main").classList.remove("transparent");
 
@@ -224,7 +228,7 @@ async function displayLightBoxOnClick(mediaModels) {
       // console.log(mediaDOM);
 
       // On vérifie si la lightbox n'est pas déjà ouverte
-      if (document.querySelector(".lightbox-section.displayLightBox")) {
+      if (document.querySelector(".lightbox-aside.displayLightBox")) {
         console.log("Do nothing => la lightbox est déjà ouverte");
       } else {
         // Ajoute le media à la lightbox

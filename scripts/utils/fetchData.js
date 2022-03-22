@@ -42,7 +42,7 @@ async function getPhotographer(id) {
 }
 
 async function getMedias() {
-  return fetchJSON("/data/photographers.json")
+  return fetchJSON("data/photographers.json")
     .then((data) => data.media)
     .catch((error) => {
       console.error(error);

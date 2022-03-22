@@ -9,25 +9,25 @@
   align-items: center;
 }
 
-.photograph-header div h2 {
+.photograph-header article h1 {
   color: #d3573c;
   font-size: 64px;
   margin-bottom: 0;
   margin-top: 15px;
 }
 
-.photograph-header div p {
+.photograph-header article p {
   margin-top: 20px;
   margin-bottom: 20px;
   font-weight: 400;
 }
 
-.photograph-header div p.location {
+.photograph-header article p.location {
   color: #901c1c;
   font-size: 24px;
 }
 
-.photograph-header div p.tagline {
+.photograph-header article p.tagline {
   color: #525252;
   font-size: 18px;
 }
@@ -392,11 +392,11 @@ form .contact-button:focus {
 }
 
 /* ----------------------------- LIGHTBOX -------------------------------- */
-.lightbox-section {
+.lightbox-aside {
   display: none;
 }
 
-.lightbox-section.displayLightBox {
+.lightbox-aside.displayLightBox {
   display: block;
 }
 

@@ -16,7 +16,8 @@ function mediaFactory(data) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
-      img.setAttribute("alt", " ");
+      img.setAttribute("alt", `${title}` + ", closeup view");
+      img.setAttribute("title", `${title}` + ", closeup view");
       article.appendChild(img);
     }
     // ... ou de la vidéo
@@ -24,6 +25,7 @@ function mediaFactory(data) {
       const vid = document.createElement("video");
       vid.textContent = "Sorry, your browser doesn't support embedded videos.";
       vid.setAttribute("controls", "");
+      vid.setAttribute("title", `${title}` + ", closeup view");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -45,6 +47,7 @@ function mediaFactory(data) {
     titleParagraph.textContent = title;
 
     const likesParagraph = document.createElement("p");
+    likesParagraph.setAttribute("title", "likes");
     likesParagraph.classList.add("media-likes");
 
     const likesSpan = document.createElement("span");
@@ -80,7 +83,7 @@ function mediaFactory(data) {
       mediaDOM = document.createElement("img");
       mediaDOM.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
-      mediaDOM.setAttribute("alt", " ");
+      mediaDOM.setAttribute("alt", title);
     }
     // ... ou de la vidéo
     else if (video) {
@@ -95,12 +98,12 @@ function mediaFactory(data) {
         "type",
         "video/" + video_source.substring(video_source.indexOf(".") + 1)
       );
-
       mediaDOM.insertBefore(src, mediaDOM.firstChild);
     }
     //-------------------------------------------------------------------
 
     titleParagraph.textContent = title;
+    mediaDOM.setAttribute("title", title);
 
     article.appendChild(mediaDOM);
     article.appendChild(titleParagraph);
