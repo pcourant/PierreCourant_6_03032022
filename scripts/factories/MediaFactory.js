@@ -15,7 +15,6 @@ function mediaFactory(data) {
     if (image) {
       const img = document.createElement("img");
       img.setAttribute("src", picture);
-      // Texte alternatif vide selon la maquette Figma
       img.setAttribute("alt", `${title}` + ", closeup view");
       img.setAttribute("tabindex", "0");
       article.appendChild(img);
@@ -84,7 +83,6 @@ function mediaFactory(data) {
     if (image) {
       mediaDOM = document.createElement("img");
       mediaDOM.setAttribute("src", picture);
-      // Texte alternatif vide selon la maquette Figma
       mediaDOM.setAttribute("alt", title);
     }
     // ... ou de la vidéo

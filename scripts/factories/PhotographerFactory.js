@@ -2,7 +2,7 @@ function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
 
   const picture = `assets/photographers/${portrait}`;
-  let totalLikes = 0;
+  // let totalLikes = 0;
 
   function getUserCardDOM() {
     // Création de l'élément DOM : article
@@ -16,7 +16,7 @@ function photographerFactory(data) {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     // Texte alternatif vide selon la maquette Figma
-    img.setAttribute("alt", " ");
+    img.setAttribute("alt", "");
     const h2 = document.createElement("h2");
     h2.textContent = name;
     link.appendChild(img);
@@ -68,7 +68,7 @@ function photographerFactory(data) {
     const img = document.createElement("img");
     img.setAttribute("src", picture);
     // Texte alternatif vide selon la maquette Figma
-    img.setAttribute("alt", name);
+    img.setAttribute("alt", "");
 
     // Création du DOM
     photographHeader.insertBefore(description, photographHeader.firstChild);
