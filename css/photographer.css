@@ -61,7 +61,7 @@
 }
 
 #main .contact-button:hover,
-#main .contact-button:focus {
+#main .contact-button:focus-visible {
   background-color: #db8876;
   color: black;
   cursor: pointer;
@@ -120,7 +120,7 @@
 }
 
 #sorting-btn:hover,
-#sorting-btn:focus {
+#sorting-btn:focus-visible {
   background-color: #db8876;
   color: black;
   cursor: pointer;
@@ -178,7 +178,6 @@ ul#hidden-sorting li:nth-child(1) {
 }
 
 ul#hidden-sorting li:hover,
-ul#hidden-sorting li:focus,
 ul#hidden-sorting li:focus-visible {
   background-color: #db8876;
   color: black;
@@ -186,14 +185,12 @@ ul#hidden-sorting li:focus-visible {
 }
 
 ul#hidden-sorting li:nth-child(1):hover,
-ul#hidden-sorting li:nth-child(1):focus,
 ul#hidden-sorting li:nth-child(1):focus-visible {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
 ul#hidden-sorting li:last-child:hover,
-ul#hidden-sorting li:last-child:focus,
 ul#hidden-sorting li:last-child:focus-visible {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
@@ -209,7 +206,6 @@ ul#hidden-sorting li:last-child:focus-visible {
   margin: 25px 0;
 }
 
-.media:focus,
 .media:focus-visible {
   outline: 5px solid #901c1c;
 }
@@ -264,7 +260,6 @@ ul#hidden-sorting li:last-child:focus-visible {
   color: #db8876;
 }
 
-.media-title-container .media-likes:focus,
 .media-title-container .media-likes:focus-visible {
   outline: 3px solid #901c1c;
 }
@@ -340,7 +335,6 @@ ul#hidden-sorting li:last-child:focus-visible {
   cursor: pointer;
 }
 
-.modal header img:focus,
 .modal header img:focus-visible {
   outline: 5px solid black;
   border-radius: 50%;
@@ -398,7 +392,6 @@ form textarea {
 }
 
 form .contact-button:hover,
-form .contact-button:focus,
 form .contact-button:focus-visible {
   background-color: #7a1515;
   cursor: pointer;
@@ -465,7 +458,6 @@ form .contact-button:focus-visible {
   cursor: pointer;
 }
 
-.icon-LB:focus,
 .icon-LB:focus-visible {
   outline: 5px solid black;
 }
