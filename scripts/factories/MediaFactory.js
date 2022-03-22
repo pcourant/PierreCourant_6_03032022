@@ -17,6 +17,7 @@ function mediaFactory(data) {
       img.setAttribute("src", picture);
       img.setAttribute("alt", `${title}` + ", closeup view");
       img.setAttribute("tabindex", "0");
+      img.classList.add("media");
       article.appendChild(img);
     }
     // ... ou de la vidéo
@@ -26,6 +27,7 @@ function mediaFactory(data) {
       vid.setAttribute("controls", "");
       vid.setAttribute("aria-label", `${title}` + ", closeup view");
       vid.setAttribute("tabindex", "0");
+      vid.classList.add("media");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);

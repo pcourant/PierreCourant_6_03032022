@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- L'attribut d'accessibility "lang" en "fr" car le texte de la page est en français -->
 <html lang="fr">
   <head>
     <link href="css/style.css" rel="stylesheet" type="text/css" />
@@ -182,7 +183,7 @@
         </form>
       </div>
     </section>
-    <!-- La lightbox pour parcours les médias invisible par défaut  -->
+    <!-- La lightbox pour afficher en grand et parcourir les médias, invisible par défaut  -->
     <aside class="lightbox-aside" aria-hidden="true">
       <article id="lightbox-container">
         <img
@@ -213,6 +214,8 @@
         </div>
       </article>
     </aside>
+
+    <!-- ************** Integration des scripts JS *************************** -->
     <script src="scripts/utils/fetchData.js"></script>
     <script src="scripts/utils/contactForm.js"></script>
     <script src="scripts/factories/PhotographerFactory.js"></script>

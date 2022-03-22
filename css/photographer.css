@@ -1,3 +1,6 @@
+/***********************************************************/
+/******************* PHOTOGRAPHE HEADER *******************/
+
 .photograph-header {
   background-color: #fafafa;
   height: 300px;
@@ -64,11 +67,14 @@
   cursor: pointer;
 }
 
-/* ---------------------------- MEDIA SECTION ------------------------------------ */
+/******************************************************/
+/******************* MEDIA SECTION *******************/
 
 .media-section {
   margin: 20px 100px;
 }
+
+/* ----------- TRIER PAR BUTTON ----------- */
 
 .media-sorting-container {
   height: 70px;
@@ -143,10 +149,8 @@ ul#hidden-sorting {
   padding: 0 0;
 
   display: none;
-  /* display: flex; */
   flex-direction: column;
   justify-content: space-between;
-  /* align-items: center; */
 }
 
 ul#hidden-sorting.display {
@@ -162,18 +166,8 @@ ul#hidden-sorting hr {
 }
 
 ul#hidden-sorting li {
-  /* background: #901c1c;
-  color: #fff;
-  font-size: 18px;
-  font-weight: bold; */
-  /* padding: 15px; */
-  /* height: 70px; */
   padding: 14px 15px;
 }
-
-/* #arrow-up-close {
-  z-index: 10;
-} */
 
 ul#hidden-sorting li:nth-child(1) {
   align-items: center;
@@ -215,17 +209,12 @@ ul#hidden-sorting li:last-child:focus-visible {
   margin: 25px 0;
 }
 
-.media-container article img:hover,
-.media-container article img:focus,
-.media-container article img:focus-visible,
-.media-container article video:hover,
-.media-container article video:focus,
-.media-container article video:focus-visible {
-  outline: black auto 1px;
+.media:focus,
+.media:focus-visible {
+  outline: 5px solid #901c1c;
 }
 
-.media-container article img,
-.media-container article video {
+.media {
   height: 300px;
   width: 350px;
   background: #c4c4c4;
@@ -275,13 +264,10 @@ ul#hidden-sorting li:last-child:focus-visible {
   color: #db8876;
 }
 
-/* .media-title-container .media-likes:hover .media-likes-span {
-  color: black;
+.media-title-container .media-likes:focus,
+.media-title-container .media-likes:focus-visible {
+  outline: 3px solid #901c1c;
 }
-
-.media-title-container .media-likes:hover i {
-  color: #db8876;
-} */
 
 /* ---------------------------------------------------------------- */
 
@@ -354,17 +340,22 @@ ul#hidden-sorting li:last-child:focus-visible {
   cursor: pointer;
 }
 
+.modal header img:focus,
+.modal header img:focus-visible {
+  outline: 5px solid black;
+  border-radius: 50%;
+  padding: 5px;
+}
+
 .modal header h2 {
   font-size: 64px;
   font-weight: normal;
   text-align: start;
-  /* width: 50%; */
 }
 
 .modal h2 {
   font-size: 64px;
   font-weight: normal;
-  /* justify-self: left; */
   margin: 0 auto 0 0;
 }
 
@@ -407,7 +398,8 @@ form textarea {
 }
 
 form .contact-button:hover,
-form .contact-button:focus {
+form .contact-button:focus,
+form .contact-button:focus-visible {
   background-color: #7a1515;
   cursor: pointer;
 }
@@ -425,11 +417,9 @@ form .contact-button:focus {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.8);
 
-  width: calc((100vh - 40px) * 1.27);
-  /* width: 50%; */
   height: calc(100vh - 40px);
-  /* padding: 35px; */
-  /* margin: auto; */
+  /* Garde le rapport hauteur/largeur fournit par la maquette Figma */
+  width: calc((100vh - 40px) * 1.27);
 
   display: flex;
   justify-content: center;
@@ -454,26 +444,19 @@ form .contact-button:focus {
 }
 
 #previous-LB-container {
-  /* align-self: center; */
   text-align: center;
 }
 
 #next-LB-container {
-  /* align-self: flex-start; */
-
   display: flex;
   flex-direction: column;
   justify-content: start;
   align-items: center;
-
-  /* padding: 5% 0; */
 }
 
 #close-LB {
   width: 3.5%;
-
   position: absolute;
-
   top: 7%;
   right: 3%;
 }
@@ -482,8 +465,9 @@ form .contact-button:focus {
   cursor: pointer;
 }
 
-.icon-LB:focus {
-  outline: black auto 1px;
+.icon-LB:focus,
+.icon-LB:focus-visible {
+  outline: 5px solid black;
 }
 
 #center-LB-container article {
