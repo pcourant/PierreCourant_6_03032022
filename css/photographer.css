@@ -113,7 +113,8 @@
   align-items: center;
 }
 
-#sorting-btn:hover {
+#sorting-btn:hover,
+#sorting-btn:focus {
   background-color: #db8876;
   color: black;
   cursor: pointer;
@@ -182,18 +183,24 @@ ul#hidden-sorting li:nth-child(1) {
   padding-top: 23.5px;
 }
 
-ul#hidden-sorting li:hover {
+ul#hidden-sorting li:hover,
+ul#hidden-sorting li:focus,
+ul#hidden-sorting li:focus-visible {
   background-color: #db8876;
   color: black;
   cursor: pointer;
 }
 
-ul#hidden-sorting li:nth-child(1):hover {
+ul#hidden-sorting li:nth-child(1):hover,
+ul#hidden-sorting li:nth-child(1):focus,
+ul#hidden-sorting li:nth-child(1):focus-visible {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-ul#hidden-sorting li:last-child:hover {
+ul#hidden-sorting li:last-child:hover,
+ul#hidden-sorting li:last-child:focus,
+ul#hidden-sorting li:last-child:focus-visible {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
@@ -206,6 +213,15 @@ ul#hidden-sorting li:last-child:hover {
   row-gap: 35px;
   column-gap: 95px;
   margin: 25px 0;
+}
+
+.media-container article img:hover,
+.media-container article img:focus,
+.media-container article img:focus-visible,
+.media-container article video:hover,
+.media-container article video:focus,
+.media-container article video:focus-visible {
+  outline: black auto 1px;
 }
 
 .media-container article img,
@@ -249,7 +265,8 @@ ul#hidden-sorting li:last-child:hover {
   margin-left: 7px;
 }
 
-.media-title-container .media-likes:hover {
+.media-title-container .media-likes:hover,
+.media-title-container .media-likes:focus-visible {
   cursor: pointer;
   color: #db8876;
 }
@@ -359,7 +376,7 @@ form label {
   font-size: 36px;
 }
 
-form div {
+form .inputs-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -459,6 +476,10 @@ form .contact-button:focus {
 
 .icon-LB {
   cursor: pointer;
+}
+
+.icon-LB:focus {
+  outline: black auto 1px;
 }
 
 #center-LB-container article {

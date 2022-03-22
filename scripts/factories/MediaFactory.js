@@ -17,7 +17,7 @@ function mediaFactory(data) {
       img.setAttribute("src", picture);
       // Texte alternatif vide selon la maquette Figma
       img.setAttribute("alt", `${title}` + ", closeup view");
-      img.setAttribute("title", `${title}` + ", closeup view");
+      img.setAttribute("tabindex", "0");
       article.appendChild(img);
     }
     // ... ou de la vidéo
@@ -25,7 +25,8 @@ function mediaFactory(data) {
       const vid = document.createElement("video");
       vid.textContent = "Sorry, your browser doesn't support embedded videos.";
       vid.setAttribute("controls", "");
-      vid.setAttribute("title", `${title}` + ", closeup view");
+      vid.setAttribute("aria-label", `${title}` + ", closeup view");
+      vid.setAttribute("tabindex", "0");
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -48,6 +49,7 @@ function mediaFactory(data) {
 
     const likesParagraph = document.createElement("p");
     likesParagraph.setAttribute("title", "likes");
+    likesParagraph.setAttribute("tabindex", "0");
     likesParagraph.classList.add("media-likes");
 
     const likesSpan = document.createElement("span");
@@ -91,6 +93,7 @@ function mediaFactory(data) {
       mediaDOM.textContent =
         "Sorry, your browser doesn't support embedded videos.";
       mediaDOM.setAttribute("controls", "");
+      mediaDOM.setAttribute("aria-label", title);
 
       const src = document.createElement("source");
       src.setAttribute("src", video_source);
@@ -103,7 +106,6 @@ function mediaFactory(data) {
     //-------------------------------------------------------------------
 
     titleParagraph.textContent = title;
-    mediaDOM.setAttribute("title", title);
 
     article.appendChild(mediaDOM);
     article.appendChild(titleParagraph);

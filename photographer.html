@@ -20,22 +20,19 @@
     <title>Fisheye - photographe</title>
   </head>
   <body>
-    <header>
+    <header role="banner" aria-hidden="false">
       <a href="index.html"
-        ><img
-          src="assets/images/logo.png"
-          alt="Page d'accueil Fisheye"
-          class="logo"
+        ><img src="assets/images/logo.png" alt="Fisheye Home Page" class="logo"
       /></a>
     </header>
-    <main id="main">
-      <section title="photographer information" class="photograph-header">
+    <main id="main" aria-hidden="false">
+      <header aria-label="photographer information" class="photograph-header">
         <!-- Dynamiquement ici : <article> avec les informations du photographe -->
         <button class="contact-button" onclick="displayModal()">
           Contactez-moi
         </button>
         <!-- Dynamiquement ici : le portrait <img> du photographe -->
-      </section>
+      </header>
       <section class="media-section">
         <!-- Le bouton et menu dropdown de tri -->
         <div class="media-sorting-container">
@@ -46,33 +43,33 @@
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-labelledby="sorting-label sorting-btn"
-              title="Order By"
             >
-              <span>Popularité</span
-              ><i
+              <span>Popularité</span>
+              <i
                 class="fas fa-chevron-down"
                 id="arrow-down-open"
-                title="Open list"
+                aria-label="Open list"
               ></i>
             </button>
             <ul
               id="hidden-sorting"
               role="listbox"
               aria-labelledby="sorting-label"
-              tabindex="-1"
               aria-activedescendant="sorting-label"
+              tabindex="-1"
             >
               <li
                 id="popular-option"
                 class="sorting"
                 role="option"
                 aria-selected="true"
+                tabindex="0"
               >
                 <span>Popularité</span>
                 <i
                   class="fas fa-chevron-up"
                   id="arrow-up-close"
-                  title="Close list"
+                  aria-label="Close list"
                 ></i>
               </li>
               <hr />
@@ -81,6 +78,7 @@
                 class="sorting"
                 role="option"
                 aria-selected="false"
+                tabindex="0"
               >
                 <span>Date</span>
               </li>
@@ -90,6 +88,7 @@
                 class="sorting"
                 role="option"
                 aria-selected="false"
+                tabindex="0"
               >
                 <span>Titre</span>
               </li>
@@ -100,61 +99,75 @@
           <!-- Dynamiquement ici : toutes les médias cards du photographe -->
         </div>
         <!-- Nombre total de likes et tarif journalier -->
-        <div id="likes-price-container" title="photographer likes and price">
+        <div
+          id="likes-price-container"
+          aria-label="photographer likes and price"
+        >
           <p>
             <span id="likes-container">...</span>
-            <i class="fa fa-heart"></i>
+            <i class="fa fa-heart" aria-label="likes"></i>
           </p>
           <p><span id="price-container">...</span>€ / jour</p>
         </div>
       </section>
     </main>
     <!-- La modale de formulaire de contact invisible par défaut  -->
-    <section role="dialog" class="contact-modal" aria-label="contact me form">
-      <div class="modal">
-        <header title="contact form header">
-          <h2>
+    <section
+      role="dialog"
+      class="contact-modal"
+      aria-label="contact me form"
+      aria-hidden="true"
+      aria-describedby="modal-title"
+    >
+      <div class="modal" role="document">
+        <header aria-label="contact form header">
+          <h2 id="modal-title">
             Contactez-moi<br />
             ...
           </h2>
           <img
-            title="Close form"
+            id="close-modal"
+            aria-label="Close form"
+            role="button"
+            tabindex="0"
             src="assets/icons/close.svg"
             onclick="closeModal()"
           />
         </header>
         <form id="contact-form" method="POST">
-          <div>
-            <label for="firstname" id="label-firstname">Prénom</label>
-            <input
-              name="Prénom"
-              id="firstname"
-              aria-labelledby="label-firstname"
-              aria-required="true"
-              type="text"
-              placeholder="Jean"
-              required
-            />
-            <label for="lastname" id="label-lastname">Nom</label>
-            <input
-              name="Nom"
-              id="lastname"
-              aria-labelledby="label-lastname"
-              aria-required="true"
-              type="text"
-              placeholder="Dupont"
-              required
-            />
-            <label for="email" id="label-email">Email</label>
-            <input
-              name="Email"
-              id="email"
-              aria-labelledby="label-emailname"
-              aria-required="true"
-              type="email"
-              placeholder="jean.dupont@gmail.com"
-              required
-            />
+          <div class="inputs-container">
+            <div role="group" aria-label="Your coordinate">
+              <label for="firstname" id="label-firstname">Prénom</label>
+              <input
+                name="Prénom"
+                id="firstname"
+                aria-labelledby="label-firstname"
+                aria-required="true"
+                type="text"
+                placeholder="Jean"
+                required
+              />
+              <label for="lastname" id="label-lastname">Nom</label>
+              <input
+                name="Nom"
+                id="lastname"
+                aria-labelledby="label-lastname"
+                aria-required="true"
+                type="text"
+                placeholder="Dupont"
+                required
+              />
+              <label for="email" id="label-email">Email</label>
+              <input
+                name="Email"
+                id="email"
+                aria-labelledby="label-emailname"
+                aria-required="true"
+                type="email"
+                placeholder="jean.dupont@gmail.com"
+                required
+              />
+            </div>
             <label for="message" id="label-message">Votre message</label>
             <textarea
               name="Message"
@@ -165,28 +178,29 @@
               required
             ></textarea>
           </div>
-          <button class="contact-button" type="submit" title="Send">
-            Envoyer
-          </button>
+          <button class="contact-button" type="submit">Envoyer</button>
         </form>
       </div>
     </section>
     <!-- La lightbox pour parcours les médias invisible par défaut  -->
-    <aside class="lightbox-aside">
+    <aside class="lightbox-aside" aria-hidden="true">
       <article id="lightbox-container">
         <img
           src="assets/icons/close_red.svg"
           id="close-LB"
           class="icon-LB"
-          title="Close dialog"
-          onclick="closeLightBox()"
+          aria-label="Close dialog"
+          role="button"
+          tabindex="0"
         />
         <div id="previous-LB-container">
           <img
             src="assets/icons/previous.svg"
             id="previous-chevron-LB"
             class="icon-LB"
-            title="Previous media"
+            aria-label="Previous media"
+            role="button"
+            tabindex="0"
           />
         </div>
         <div id="center-LB-container"></div>
@@ -195,7 +209,9 @@
             src="assets/icons/next.svg"
             id="next-chevron-LB"
             class="icon-LB"
-            title="Next media"
+            aria-label="Next media"
+            role="button"
+            tabindex="0"
           />
         </div>
       </article>
