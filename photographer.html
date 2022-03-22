@@ -26,7 +26,7 @@
       /></a>
     </header>
     <main id="main" aria-hidden="false">
-      <header aria-label="photographer information" class="photograph-header">
+      <header class="photograph-header">
         <!-- Dynamiquement ici : <article> avec les informations du photographe -->
         <button class="contact-button" onclick="displayModal()">
           Contactez-moi
@@ -48,7 +48,7 @@
               <i
                 class="fas fa-chevron-down"
                 id="arrow-down-open"
-                aria-label="Open list"
+                aria-hidden="true"
               ></i>
             </button>
             <ul
@@ -69,7 +69,7 @@
                 <i
                   class="fas fa-chevron-up"
                   id="arrow-up-close"
-                  aria-label="Close list"
+                  aria-hidden="true"
                 ></i>
               </li>
               <hr />
@@ -102,10 +102,11 @@
         <div
           id="likes-price-container"
           aria-label="photographer likes and price"
+          role="region"
         >
           <p>
             <span id="likes-container">...</span>
-            <i class="fa fa-heart" aria-label="likes"></i>
+            <i class="fa fa-heart" aria-hidden="true"></i>
           </p>
           <p><span id="price-container">...</span>€ / jour</p>
         </div>
@@ -120,7 +121,7 @@
       aria-describedby="modal-title"
     >
       <div class="modal" role="document">
-        <header aria-label="contact form header">
+        <header>
           <h2 id="modal-title">
             Contactez-moi<br />
             ...
@@ -128,7 +129,6 @@
           <img
             id="close-modal"
             aria-label="Close form"
-            role="button"
             tabindex="0"
             src="assets/icons/close.svg"
             onclick="closeModal()"
@@ -161,7 +161,7 @@
               <input
                 name="Email"
                 id="email"
-                aria-labelledby="label-emailname"
+                aria-labelledby="label-email"
                 aria-required="true"
                 type="email"
                 placeholder="jean.dupont@gmail.com"
@@ -189,8 +189,7 @@
           src="assets/icons/close_red.svg"
           id="close-LB"
           class="icon-LB"
-          aria-label="Close dialog"
-          role="button"
+          alt="Close dialog"
           tabindex="0"
         />
         <div id="previous-LB-container">
@@ -198,8 +197,7 @@
             src="assets/icons/previous.svg"
             id="previous-chevron-LB"
             class="icon-LB"
-            aria-label="Previous media"
-            role="button"
+            alt="Previous media"
             tabindex="0"
           />
         </div>
@@ -209,8 +207,7 @@
             src="assets/icons/next.svg"
             id="next-chevron-LB"
             class="icon-LB"
-            aria-label="Next media"
-            role="button"
+            alt="Next media"
             tabindex="0"
           />
         </div>

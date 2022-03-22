@@ -199,7 +199,8 @@ async function displayPrice(photographerModel) {
 async function displayModalHeaderH2(photographerModel) {
   const modalHeaderH2 = document.querySelector(".contact-modal h2");
 
-  modalHeaderH2.innerHTML = `Contactez-moi<br />` + `${photographerModel.name}`;
+  modalHeaderH2.innerHTML =
+    `Contactez-moi <br />` + `${photographerModel.name}`;
 }
 
 async function displayModal() {

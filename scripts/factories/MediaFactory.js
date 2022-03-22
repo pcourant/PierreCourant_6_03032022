@@ -42,7 +42,7 @@ function mediaFactory(data) {
     // Création du media title container :
     const divTitle = document.createElement("div");
     divTitle.classList.add("media-title-container");
-    const titleParagraph = document.createElement("p");
+    const titleParagraph = document.createElement("h2");
     titleParagraph.classList.add("media-title");
     titleParagraph.textContent = title;
 
