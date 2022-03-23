@@ -42,6 +42,7 @@
               aria-haspopup="listbox"
               aria-expanded="false"
               aria-labelledby="sorting-label sorting-btn"
+              aria-activedescendant="option1"
               tabindex="0"
             >
               <span>Popularité</span>
@@ -55,11 +56,10 @@
               id="dropdownmenu"
               role="listbox"
               aria-labelledby="sorting-label"
-              aria-activedescendant="sorting-label"
               tabindex="-1"
             >
               <li
-                id="popular-option"
+                id="option1"
                 class="sorting"
                 role="option"
                 aria-selected="true"
@@ -75,7 +75,7 @@
                 </div>
               </li>
               <li
-                id="date-option"
+                id="option2"
                 class="sorting"
                 role="option"
                 aria-selected="false"
@@ -86,7 +86,7 @@
                 </div>
               </li>
               <li
-                id="title-option"
+                id="option3"
                 class="sorting"
                 role="option"
                 aria-selected="false"
