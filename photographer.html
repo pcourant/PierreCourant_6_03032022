@@ -29,9 +29,7 @@
     <main id="main" aria-hidden="false">
       <header class="photograph-header">
         <!-- Dynamiquement ici : <article> avec les informations du photographe -->
-        <button class="contact-button" onclick="displayModal()">
-          Contactez-moi
-        </button>
+        <button class="contact-button">Contactez-moi</button>
         <!-- Dynamiquement ici : le portrait <img> du photographe -->
       </header>
       <section class="media-section">
@@ -133,7 +131,6 @@
             aria-label="Close form"
             tabindex="0"
             src="assets/icons/close.svg"
-            onclick="closeModal()"
           />
         </header>
         <form id="contact-form" method="POST">
@@ -217,10 +214,10 @@
     </aside>
 
     <!-- ************** Integration des scripts JS *************************** -->
-    <script src="scripts/utils/fetchData.js"></script>
-    <script src="scripts/utils/contactForm.js"></script>
-    <script src="scripts/factories/PhotographerFactory.js"></script>
-    <script src="scripts/factories/MediaFactory.js"></script>
-    <script src="scripts/pages/photographer.js"></script>
+    <!-- <script src="scripts/utils/fetchData.js"></script> -->
+    <!-- <script src="scripts/utils/contactForm.js"></script> -->
+    <!-- <script src="scripts/factories/PhotographerFactory.js"></script> -->
+    <!-- <script src="scripts/factories/MediaFactory.js"></script> -->
+    <script type="module" src="scripts/pages/photographer.js"></script>
   </body>
 </html>

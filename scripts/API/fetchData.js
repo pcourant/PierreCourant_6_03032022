@@ -1,3 +1,11 @@
+export {
+  getPhotographers,
+  getPhotographer,
+  getMedias,
+  getMediasOfPhotographer,
+  getMedia,
+};
+
 //An fetch error with the body of the response
 class FetchError extends Error {
   constructor(response) {

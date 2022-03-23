@@ -1,3 +1,16 @@
+export { MEDIA_MODELS, initMediasModels, displayMedias };
+
+const MEDIA_MODELS = new Array();
+
+async function initMediasModels(medias) {
+  await getAllMediaModels(medias);
+
+  // tri par défaut
+  MEDIA_MODELS.sort((a, b) => {
+    return b.likes - a.likes;
+  });
+}
+
 function mediaFactory(data) {
   let { id, photographerId, title, image, video, likes, date } = data;
 
@@ -117,12 +130,12 @@ function mediaFactory(data) {
   }
 
   function toggleLikes() {
-    if (!this.liked) {
+    if (!liked) {
       this.likes++;
-      this.liked = true;
+      liked = true;
     } else {
       this.likes--;
-      this.liked = false;
+      liked = false;
     }
 
     // Update le nombre de likes affiché dans le DOM
@@ -144,4 +157,21 @@ function mediaFactory(data) {
     toggleLikes,
     getMediaLightBoxDOM,
   };
+}
+
+async function getAllMediaModels(medias) {
+  medias.forEach((media) => {
+    const mediaModel = mediaFactory(media);
+    mediaModel.getMediaCardDOM();
+    mediaModel.getMediaLightBoxDOM();
+    MEDIA_MODELS.push(mediaModel);
+  });
+}
+
+async function displayMedias() {
+  const mediaContainer = document.querySelector(".media-container");
+
+  MEDIA_MODELS.forEach((mediaModel) => {
+    mediaContainer.appendChild(mediaModel.mediaCardDOM);
+  });
 }
