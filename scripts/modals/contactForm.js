@@ -23,6 +23,15 @@ async function modalEventHandler(photographerModel) {
 }
 
 async function displayModal() {
+  // On vérifie si la lightbox ou la contact-me modal ne sont pas déjà ouvertes
+  if (
+    document.querySelector(".lightbox-aside.displayLightBox") ||
+    document.querySelector(".contact-modal.displayModal")
+  ) {
+    console.log("Do nothing => une modale est déjà ouverte");
+    return;
+  }
+
   const modalDOM = document.querySelector(".contact-modal");
 
   // Masque le reste de la page HTML aux techno d'assistance
@@ -39,7 +48,7 @@ async function displayModal() {
   modalDOM.setAttribute("aria-hidden", "false");
 
   // Garde le focus de la page dans la modale
-  document.addEventListener("keydown", trapFocusInsideModalTabHandler);
+  document.addEventListener("keydown", trapFocusInsideModalAndEventsHandler);
   document.getElementById("close-modal").focus();
 }
 
@@ -63,7 +72,7 @@ async function closeModal() {
 
   // Fait le focus sur le bouton d'ouverture de la modale
   document.querySelector(".contact-button").focus();
-  document.removeEventListener("keydown", trapFocusInsideModalTabHandler);
+  document.removeEventListener("keydown", trapFocusInsideModalAndEventsHandler);
 
   // Reset le formulaire de contact
   const contactForm = document.getElementById("contact-form");
@@ -94,7 +103,7 @@ async function submitFormOnClick(photographerModel) {
   });
 }
 
-function trapFocusInsideModalTabHandler(e) {
+function trapFocusInsideModalAndEventsHandler(e) {
   // Source of the code : https://uxdesign.cc/how-to-trap-focus-inside-modal-to-make-it-ada-compliant-6a50f9a70700
   // add all the elements inside modal which you want to make focusable
   const focusableElements =

@@ -113,7 +113,6 @@
   text-align: left;
   padding: 0 15px;
 
-  /* display: none; */
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -287,6 +286,12 @@ ul#dropdownmenu li:last-child:focus-visible {
   align-items: center;
 
   padding: 0 31px;
+}
+
+@media screen and (min-width: 1440px) {
+  #likes-price-container {
+    right: calc(((100vw - 1440px) / 2) + 36px);
+  }
 }
 
 /* ----------------------------- MODAL -------------------------------- */

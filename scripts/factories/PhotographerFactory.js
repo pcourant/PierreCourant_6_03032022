@@ -1,10 +1,10 @@
-export { photographerFactory };
+export { photographerFactory, displayPhotographers };
 
-async function photographerFactory(data) {
+function photographerFactory(data) {
   const { name, id, city, country, tagline, price, portrait } = data;
 
   const picture = `assets/photographers/${portrait}`;
-  // let totalLikes = 0;
+  let userCardDOM = undefined;
 
   function getUserCardDOM() {
     // Création de l'élément DOM : article
@@ -42,6 +42,8 @@ async function photographerFactory(data) {
     article.appendChild(locationParagraph);
     article.appendChild(taglineParagraph);
     article.appendChild(priceParagraph);
+
+    this.userCardDOM = article;
 
     return article;
   }
@@ -84,7 +86,18 @@ async function photographerFactory(data) {
     name,
     picture,
     price,
+    userCardDOM,
     getUserCardDOM,
     constructPhotographHeaderDOM,
   };
+}
+
+async function displayPhotographers(photographers) {
+  const photographersSection = document.querySelector(".photographer-section");
+
+  photographers.forEach((photographer) => {
+    const photographerModel = photographerFactory(photographer);
+    const userCardDOM = photographerModel.getUserCardDOM();
+    photographersSection.appendChild(userCardDOM);
+  });
 }

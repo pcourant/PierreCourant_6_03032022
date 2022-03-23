@@ -55,15 +55,15 @@ async function initDropdownSortingMenu() {
 }
 
 function dropDownMenuHandler(e) {
-  const sortingBtn = document.getElementById("sorting-btn");
-  const dropDownMenu = document.getElementById("dropdownmenu");
-  const sortingListItems = Array.from(
-    document.getElementsByClassName("sorting")
-  );
-  const item = e.currentTarget;
-  const index = sortingListItems.findIndex((x) => x === e.currentTarget);
-
   if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
+    const sortingBtn = document.getElementById("sorting-btn");
+    const dropDownMenu = document.getElementById("dropdownmenu");
+    const sortingListItems = Array.from(
+      document.getElementsByClassName("sorting")
+    );
+    const item = e.currentTarget;
+    const index = sortingListItems.findIndex((x) => x === e.currentTarget);
+
     // Si un autre classement est demandé (autre que celui déjà effectif)
     if (index !== 0) {
       // Récupère les infos du tri actuel

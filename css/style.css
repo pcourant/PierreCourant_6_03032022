@@ -6,6 +6,8 @@ body {
   font-family: "DM Sans", sans-serif;
   margin: 0;
   max-width: 1440px;
+  text-align: center;
+  margin: 0 auto;
 }
 
 h1 {
@@ -102,4 +104,8 @@ header {
 .photographer-section article p.price {
   color: #757575;
   font-size: 9px;
+}
+
+.photographer-section article a:focus-visible {
+  outline: 5px solid #901c1c;
 }
