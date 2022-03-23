@@ -112,6 +112,7 @@
 
   text-align: left;
   padding: 0 15px;
+  padding-left: 18.5px;
 
   display: flex;
   justify-content: space-between;
@@ -149,7 +150,7 @@ ul#dropdownmenu {
 
   display: none;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
 ul#dropdownmenu.display {
@@ -157,23 +158,29 @@ ul#dropdownmenu.display {
   z-index: 1;
 }
 
-ul#dropdownmenu hr {
+ul#dropdownmenu li div {
+  display: flex;
   width: 90%;
+
+  padding: 14px 0;
+  border-top: 1px solid white;
   margin: 0 auto;
-  border-style: solid;
+}
+
+ul#dropdownmenu li div > span {
+  margin-left: 10px;
+}
+
+ul#dropdownmenu li:nth-child(1) div {
+  align-items: center;
+  justify-content: space-between;
+
+  padding-top: 22px;
   border-top: none;
 }
 
-ul#dropdownmenu li {
-  padding: 14px 15px;
-}
-
-ul#dropdownmenu li:nth-child(1) {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
-
-  padding-top: 23.5px;
+ul#dropdownmenu li:nth-child(1) div .icon {
+  margin-right: 5px;
 }
 
 ul#dropdownmenu li:hover,
