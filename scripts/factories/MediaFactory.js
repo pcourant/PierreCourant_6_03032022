@@ -71,7 +71,8 @@ function mediaFactory(data) {
     likesSpan.textContent = likes;
     likesParagraph.appendChild(likesSpan);
 
-    const heartIcon = document.createElement("i");
+    const heartIcon = document.createElement("span");
+    heartIcon.classList.add("icon");
     heartIcon.classList.add("fa");
     heartIcon.classList.add("fa-heart");
     heartIcon.setAttribute("aria-hidden", "true");

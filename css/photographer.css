@@ -249,7 +249,7 @@ ul#dropdownmenu li:last-child:focus-visible {
   width: 80px;
 }
 
-.media-title-container .media-likes i {
+.media-title-container .media-likes .icon {
   margin-left: 7px;
 }
 
