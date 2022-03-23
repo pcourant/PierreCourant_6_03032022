@@ -30,94 +30,83 @@ function getSortingFunction(name) {
 
 // Ouverture du menu dropdown
 // @data: les medias du photographe à trier
-async function displayDropDown(mediaModels) {
+async function displayDropDown() {
   const sortingBtn = document.getElementById("sorting-btn");
-  // const arrowOpen = document.getElementById("arrow-down-open");
-  const arrowClose = document.getElementById("arrow-up-close");
 
   // le DOM element du dropdown menu
-  const hiddenSorting = document.getElementById("hidden-sorting");
-
-  // Ajout des event listeners sur le bouton et le chevron haut du dropdown menu "trier par"
-  sortingBtn.addEventListener("click", () => {
-    sortingBtn.setAttribute("aria-expanded", "true");
-    hiddenSorting.classList.add("display");
-  });
-  arrowClose.addEventListener("click", () => {
-    sortingBtn.setAttribute("aria-expanded", "false");
-    hiddenSorting.classList.remove("display");
-  });
-
-  // Ajout des event listeners sur les éléments du dropdown menu pour trier les médias
-  sortMediasOnClick(mediaModels);
-}
-
-// Ajout des event listeners sur les éléments du dropdown menu
-async function sortMediasOnClick(mediaModels) {
-  const sortingBtn = document.getElementById("sorting-btn");
-  const hiddenSorting = document.getElementById("hidden-sorting");
+  const dropDownMenu = document.getElementById("dropdownmenu");
   const sortingListItems = Array.from(
     document.getElementsByClassName("sorting")
   );
 
-  sortingListItems.forEach((item, index) => {
-    item.addEventListener("click", () => {
-      // Si un autre classement est demandé (autre que celui déjà effectif)
-      if (index !== 0) {
-        // Récupère les infos du tri actuel
-        const newSortingName = item.querySelector("span").textContent;
-        const oldSortingName =
-          sortingListItems[0].querySelector("span").textContent;
+  // Ajout des event listeners sur le bouton et le chevron haut du dropdown menu "trier par"
+  sortingBtn.addEventListener("click", () => {
+    sortingBtn.setAttribute("aria-expanded", "true");
+    sortingBtn.setAttribute("tabindex", "-1");
 
-        // Trie et affiche les medias
-        mediaModels.sort(getSortingFunction(newSortingName));
-        displayMedias(mediaModels);
-
-        // Met à jour le bouton de tri
-        sortingBtn.querySelector("span").textContent = newSortingName;
-
-        // Intervertie les entrées du drop down menu
-        sortingListItems[0].querySelector("span").textContent = newSortingName;
-        item.querySelector("span").textContent = oldSortingName;
-      }
-
-      // Retracte le drop down menu
-      hiddenSorting.classList.remove("display");
-      sortingBtn.setAttribute("aria-expanded", "false");
-
-      // Remet le focus sur le bouton de tri
-      // sortingBtn.focus();
+    sortingListItems.forEach((item) => {
+      item.setAttribute("tabindex", "0");
     });
+    dropDownMenu.classList.add("display");
+    dropDownMenu.querySelector("li").focus();
+  });
 
-    item.addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        e.preventDefault();
+  // Ajout des event listeners sur les éléments du dropdown menu pour trier les médias
+  sortMediasOnEvent();
+}
 
-        // Si un autre classement est demandé (autre que celui déjà effectif)
-        if (index !== 0) {
-          // Récupère les infos du tri actuel
-          const newSortingName = item.querySelector("span").textContent;
-          const oldSortingName =
-            sortingListItems[0].querySelector("span").textContent;
+function dropDownMenuHandler(e) {
+  const sortingBtn = document.getElementById("sorting-btn");
+  const dropDownMenu = document.getElementById("dropdownmenu");
+  const sortingListItems = Array.from(
+    document.getElementsByClassName("sorting")
+  );
+  const item = e.currentTarget;
+  const index = sortingListItems.findIndex((x) => x === e.currentTarget);
 
-          // Trie et affiche les medias
-          mediaModels.sort(getSortingFunction(newSortingName));
-          displayMedias(mediaModels);
+  if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
+    // Si un autre classement est demandé (autre que celui déjà effectif)
+    if (index !== 0) {
+      // Récupère les infos du tri actuel
+      const newSortingName = item.querySelector("span").textContent;
+      const oldSortingName =
+        sortingListItems[0].querySelector("span").textContent;
 
-          // Met à jour le bouton de tri
-          sortingBtn.querySelector("span").textContent = newSortingName;
+      // Trie et affiche les medias
+      MEDIA_MODELS.sort(getSortingFunction(newSortingName));
+      displayMedias(MEDIA_MODELS);
 
-          // Intervertie les entrées du drop down menu
-          sortingListItems[0].querySelector("span").textContent =
-            newSortingName;
-          item.querySelector("span").textContent = oldSortingName;
-        }
+      // Met à jour le bouton de tri
+      sortingBtn.querySelector("span").textContent = newSortingName;
 
-        // Retracte le drop down menu
-        hiddenSorting.classList.remove("display");
-        sortingBtn.setAttribute("aria-expanded", "false");
-      }
+      // Intervertie les entrées du drop down menu
+      sortingListItems[0].querySelector("span").textContent = newSortingName;
+      item.querySelector("span").textContent = oldSortingName;
+    }
+
+    // Affiche le bouton
+    sortingBtn.setAttribute("aria-expanded", "false");
+    sortingBtn.setAttribute("tabindex", "0");
+
+    // Retracte le drop down menu
+    sortingListItems.forEach((item) => {
+      item.setAttribute("tabindex", "-1");
     });
+    dropDownMenu.classList.remove("display");
+
+    // Focus sur le premier media
+    MEDIA_MODELS[0].mediaCardDOM.querySelector(".media").focus();
+  }
+}
+
+// Ajout des event listeners sur les éléments du dropdown menu
+async function sortMediasOnEvent() {
+  const sortingListItems = Array.from(
+    document.getElementsByClassName("sorting")
+  );
+  sortingListItems.forEach((item) => {
+    item.addEventListener("click", dropDownMenuHandler);
+    item.addEventListener("keydown", dropDownMenuHandler);
   });
 }
 
@@ -184,10 +173,10 @@ async function toggleLikesOnClick(mediaModels) {
   });
 }
 
-async function displayLikes(mediaModels) {
+async function displayLikes() {
   const likesContainer = document.getElementById("likes-container");
 
-  likesContainer.textContent = await getTotalLikes(mediaModels);
+  likesContainer.textContent = await getTotalLikes(MEDIA_MODELS);
 }
 
 async function displayPrice(photographerModel) {
@@ -322,8 +311,8 @@ async function closeLightBox(mediaModel) {
   likeDOM.focus();
 }
 
-async function displayLightBoxOnClick(mediaModels) {
-  mediaModels.forEach((mediaModel) => {
+async function displayLightBoxOnClick() {
+  MEDIA_MODELS.forEach((mediaModel) => {
     let mediaDOM = mediaModel.mediaCardDOM.querySelector("article img");
     if (!mediaDOM) {
       mediaDOM = mediaModel.mediaCardDOM.querySelector("article video");
@@ -332,6 +321,8 @@ async function displayLightBoxOnClick(mediaModels) {
     mediaDOM.addEventListener("click", (e) => {
       // Empêche le navigateur de lire la vidéo lorsque l'on clique dessus
       e.preventDefault();
+
+      // N'OUVRIR QU'UNE MODALE À LA FOIS - TO DO
 
       // On vérifie si la lightbox n'est pas déjà ouverte
       if (document.querySelector(".lightbox-aside.displayLightBox")) {
@@ -364,53 +355,53 @@ async function displayLightBoxOnClick(mediaModels) {
   });
 }
 
-async function navigationLightBoxOnClick(mediaModels) {
+async function navigationLightBoxOnClick() {
   const previousDom = document.getElementById("previous-chevron-LB");
   const nextDom = document.getElementById("next-chevron-LB");
   const closeDOM = document.getElementById("close-LB");
   const centerLB = document.getElementById("center-LB-container");
 
   nextDom.addEventListener("click", () => {
-    const currentMedia = mediaModels.find(
+    const currentMedia = MEDIA_MODELS.find(
       (x) => `${x.id}` === centerLB.firstChild.id
     );
-    let nextMediaIndex = mediaModels.indexOf(currentMedia) + 1;
-    if (nextMediaIndex > mediaModels.length - 1) {
+    let nextMediaIndex = MEDIA_MODELS.indexOf(currentMedia) + 1;
+    if (nextMediaIndex > MEDIA_MODELS.length - 1) {
       nextMediaIndex = 0;
     }
-    const nextMedia = mediaModels[nextMediaIndex];
+    const nextMedia = MEDIA_MODELS[nextMediaIndex];
 
     // console.log(currentMedia);
     // console.log(nextMedia);
-    // console.log(mediaModels);
+    // console.log(MEDIA_MODELS);
 
     centerLB.removeChild(centerLB.firstChild);
     centerLB.appendChild(nextMedia.mediaLightBoxDOM);
   });
 
   previousDom.addEventListener("click", () => {
-    const currentMedia = mediaModels.find(
+    const currentMedia = MEDIA_MODELS.find(
       (x) => `${x.id}` === centerLB.firstChild.id
     );
-    let previousMediaIndex = mediaModels.indexOf(currentMedia) - 1;
+    let previousMediaIndex = MEDIA_MODELS.indexOf(currentMedia) - 1;
     if (previousMediaIndex < 0) {
-      previousMediaIndex = mediaModels.length - 1;
+      previousMediaIndex = MEDIA_MODELS.length - 1;
     }
-    const previousMedia = mediaModels[previousMediaIndex];
+    const previousMedia = MEDIA_MODELS[previousMediaIndex];
 
     centerLB.removeChild(centerLB.firstChild);
     centerLB.appendChild(previousMedia.mediaLightBoxDOM);
   });
 
   closeDOM.addEventListener("click", () => {
-    const currentMedia = mediaModels.find(
+    const currentMedia = MEDIA_MODELS.find(
       (x) => `${x.id}` === centerLB.firstChild.id
     );
     closeLightBox(currentMedia);
   });
 }
 
-// async function closeModalOnEscapeKey(mediaModels) {
+// async function closeModalOnEscapeKey() {
 //   const modalDOM = document.querySelector(".contact-modal");
 
 //   modalDOM.addEventListener("keydown", (e) => {
@@ -424,7 +415,7 @@ async function navigationLightBoxOnClick(mediaModels) {
 //   });
 // }
 
-// function closeModalOnEscapeKey(mediaModels) {
+// function closeModalOnEscapeKey() {
 //   const modalDOM = document.querySelector(".contact-modal");
 
 //   modalDOM.addEventListener("keydown", (e) => {
@@ -636,12 +627,12 @@ async function init() {
   const medias = await getMediasOfPhotographer(photographerId);
   MEDIA_MODELS = await getAllMediaModels(medias);
   // closeModalOrLightBoxOnEscapeKey(MEDIA_MODELS);
-  displayLikes(MEDIA_MODELS);
+  displayLikes();
   displayMedias(MEDIA_MODELS.sort(getSortingFunction("Popularité")));
-  toggleLikesOnClick(MEDIA_MODELS);
-  displayDropDown(MEDIA_MODELS);
-  displayLightBoxOnClick(MEDIA_MODELS);
-  navigationLightBoxOnClick(MEDIA_MODELS);
+  toggleLikesOnClick();
+  displayDropDown();
+  displayLightBoxOnClick();
+  navigationLightBoxOnClick();
 }
 
 init();

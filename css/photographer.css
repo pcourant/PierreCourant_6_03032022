@@ -132,7 +132,7 @@
 
 /* ------------------------------ DROPDOWN MENU ---------------------------------- */
 
-ul#hidden-sorting {
+ul#dropdownmenu {
   font-size: 18px;
   font-weight: bold;
   letter-spacing: 1.5px;
@@ -153,23 +153,23 @@ ul#hidden-sorting {
   justify-content: space-between;
 }
 
-ul#hidden-sorting.display {
+ul#dropdownmenu.display {
   display: flex;
   z-index: 1;
 }
 
-ul#hidden-sorting hr {
+ul#dropdownmenu hr {
   width: 90%;
   margin: 0 auto;
   border-style: solid;
   border-top: none;
 }
 
-ul#hidden-sorting li {
+ul#dropdownmenu li {
   padding: 14px 15px;
 }
 
-ul#hidden-sorting li:nth-child(1) {
+ul#dropdownmenu li:nth-child(1) {
   align-items: center;
   display: flex;
   justify-content: space-between;
@@ -177,21 +177,21 @@ ul#hidden-sorting li:nth-child(1) {
   padding-top: 23.5px;
 }
 
-ul#hidden-sorting li:hover,
-ul#hidden-sorting li:focus-visible {
+ul#dropdownmenu li:hover,
+ul#dropdownmenu li:focus-visible {
   background-color: #db8876;
   color: black;
   cursor: pointer;
 }
 
-ul#hidden-sorting li:nth-child(1):hover,
-ul#hidden-sorting li:nth-child(1):focus-visible {
+ul#dropdownmenu li:nth-child(1):hover,
+ul#dropdownmenu li:nth-child(1):focus-visible {
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
 }
 
-ul#hidden-sorting li:last-child:hover,
-ul#hidden-sorting li:last-child:focus-visible {
+ul#dropdownmenu li:last-child:hover,
+ul#dropdownmenu li:last-child:focus-visible {
   border-bottom-left-radius: 5px;
   border-bottom-right-radius: 5px;
 }
